@@ -25,3 +25,12 @@ on va stocker tout ce qui est entre ces deux fonctions, tout le contenu dans une
     <?php } ?>
     </tbody>
 </table>
+
+
+<?php
+
+$titre = "Liste de films";
+$titre_secondaire = "Liste des films";
+$contenu = ob_get_clean();
+
+require "view/template.php";
