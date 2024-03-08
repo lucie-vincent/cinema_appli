@@ -10,16 +10,13 @@ ob_start(); ?>
         <tr>
             <th>TITRE</th>
             <th>ANNEE SORTIE</th>
-            <th>DUREE DU FILM</th>
+            <th>DUREE</th>
             <th>SYNOPSIS</th>
-            <th>PERSONNAGE</th>
-            <th>ACTEUR/ACTRICE</th>
-
-        <tr>
+        </tr>
     </thead>
     <tbody>
         <?php
-        foreach($requete->fetchAll() as $film) { ?>
+        foreach($requetefilm->fetchAll() as $film) { ?>
             <tr>
                 <td><?= $film["titre_film"] ?></td>
                 <td><?= $film["annee_sortie_film"] ?></td>
@@ -28,6 +25,24 @@ ob_start(); ?>
             </tr>
     <?php } ?>
     </tbody>
+</table>
+
+<table>
+    <thead>
+            <tr>
+                <th>PERSONNAGE</th>
+                <th>ACTEUR/ACTRICE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach($requeteCasting->fetchAll() as $casting) { ?>
+                <tr>
+                    <td><?= $casting["nom_personnage"] ?></td>
+                    <td><?= $casting["acteur_actrice"] ?></td>
+                </tr>
+        <?php } ?>
+        </tbody>
 </table>
 
 

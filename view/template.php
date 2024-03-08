@@ -14,6 +14,7 @@ on exploitera la temporisation de sortie -->
         <a href="">Genres</a>
         <a href="">Acteurs</a>
         <a href="">Réalisateurs</a>
+        <a href="">Films</a>
     </nav>
     <div id="wrapper">
         <main>

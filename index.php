@@ -16,20 +16,20 @@ $id = (isset($_GET["id"])) ? $_GET["id"] : null;
 if(isset($_GET["action"])) {
     switch ($_GET["action"]) {
         // Films
-        case "listFilms"        : $ctrlCinema->listFilms(); break;
-        case "detailFilm"       : $ctrlCinema->detailFilm($id); break;
-
+        case "listFilms"        : $ctrlCinema->listFilms();             break;
+        case "detailFilm"       : $ctrlCinema->detailFilm($id);         break;
         // Genres
-        case "listGenres"       : $ctrlCinema->listGenres(); break;
-
+        case "listGenres"       : $ctrlCinema->listGenres();            break;
+        case "detailGenre"      : $ctrlCinema->detailGenre($id);        break;
         // Acteurs
-        case "listActeurs"      : $ctrlCinema->listActeurs(); break;
-        
+        case "listActeurs"      : $ctrlCinema->listActeurs();           break;
+        case "detailActeur"     : $ctrlCinema->detailActeur($id);       break;
         // Réalisateurs
-        case "listRealisateurs" : $ctrlCinema->listRealisateurs(); break;
-        
+        case "listRealisateurs" : $ctrlCinema->listRealisateurs();      break;
+        case "detailRealisateur": $ctrlCinema->detailRealisateur($id);  break;
         // Rôles
-        case "listRoles"        : $ctrlCinema->listRoles(); break;
+        case "listRoles"        : $ctrlCinema->listRoles();             break;
+        case "detailRole"       : $ctrlCinema->detailRole($id);         break;
     }
 } else {
     $ctrlCinema->listFilms();
