@@ -8,18 +8,28 @@ use Controller\CinemaController;
 spl_autoload_register(function($class_name) {
     include $class_name . '.php';
 });
-
 // on instancie le controller Cinema
 $ctrlCinema = new CinemaController();
 
+$id = (isset($_GET["id"])) ? $_GET["id"] : null; 
+
 if(isset($_GET["action"])) {
     switch ($_GET["action"]) {
+        // Films
+        case "listFilms"        : $ctrlCinema->listFilms(); break;
+        case "detailFilm"       : $ctrlCinema->detailFilm($id); break;
 
-        case "listFilms" : $ctrlCinema->listFilms(); break;
-        case "listGenres" : $ctrlCinema->listGenres(); break;
-        case "listActeurs" : $ctrlCinema->listActeurs(); break;
+        // Genres
+        case "listGenres"       : $ctrlCinema->listGenres(); break;
+
+        // Acteurs
+        case "listActeurs"      : $ctrlCinema->listActeurs(); break;
+        
+        // Réalisateurs
         case "listRealisateurs" : $ctrlCinema->listRealisateurs(); break;
-        case "listRoles" : $ctrlCinema->listRoles(); break;
+        
+        // Rôles
+        case "listRoles"        : $ctrlCinema->listRoles(); break;
     }
 } else {
     $ctrlCinema->listFilms();
