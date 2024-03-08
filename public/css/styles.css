@@ -1,0 +1,13 @@
+:root {
+    /* --nav-background-color: linear-gradient(rgba(42,14,217,100), rgba(14,10,40,100)); */
+    --body-color: rgb(11,11,26);
+}
+
+nav {
+    /* background-color: var(--nav-background-color); */
+}
+
+body {
+    /* background-color: var(--body-color); */
+    background-color: rgb(11,11,26);
+}

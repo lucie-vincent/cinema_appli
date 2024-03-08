@@ -29,7 +29,6 @@ ob_start(); ?>
 
 
 <?php
-die;
 $titre = "Liste de films";
 $titre_secondaire = "Liste des films";
 $contenu = ob_get_clean();
