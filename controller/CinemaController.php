@@ -17,6 +17,8 @@ class CinemaController {
         // on exécute la requête
         // on peut utiliser le query car comme il n'y a pas de variables il n'ya pas
         // d'injections possible
+        
+        // on pense à récupérer l'id dans la requete car permet d'afficher les bonnes pages dans les URL
         $requete = $pdo->query("
             SELECT * 
             FROM film
@@ -36,8 +38,8 @@ class CinemaController {
         // les injections SQL. Il peut y avoir une injection car une variable est utilisée 
         // ":id"
         $requetefilm = $pdo->prepare("
-            SELECT titre_film, date_sortie_france_film, duree_mn_film,
-                synopsis_film, note_film
+            SELECT film.titre_film, film.date_sortie_france_film, film.duree_mn_film,
+            film.synopsis_film, film.note_film, film.id_film
             FROM film
             WHERE film.id_film = :id
         ");
@@ -224,9 +226,10 @@ class CinemaController {
         // echo "test";
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-        // requete
+        INSERT INTO role (nom_personnage)
+        VALUES (':roleAdded);
         ");
-        // $requete->execute();
+        $requete->execute([":roleAdded=>$roleAdded"]);
 
         require "view/roles/ajoutRole.php";
     }
