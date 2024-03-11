@@ -12,10 +12,10 @@ on exploitera la temporisation de sortie -->
 </head>
 <body>
     <nav>
-        <a href="">Genres</a>
-        <a href="">Acteurs</a>
-        <a href="">Réalisateurs</a>
-        <a href="">Films</a>
+        <a href="index.php?action=listGenres">Genres</a>
+        <a href="index.php?action=listActeurs">Acteurs</a>
+        <a href="index.php?action=listRealisateurs">Réalisateurs</a>
+        <a href="index.php?action=listFilms">Films</a>
     </nav>
     <div id="wrapper">
         <main>

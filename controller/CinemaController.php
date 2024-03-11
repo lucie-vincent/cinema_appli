@@ -5,6 +5,11 @@ namespace Controller;
 use Model\Connect;
 
 class CinemaController {
+
+    // -------------
+    // --- films ---
+    // -------------
+
     // lister les films
     public function listFilms() {
         // on fait appel à la fonction seConnecter dans le namespace Connect (=Connect.php)
@@ -57,6 +62,10 @@ class CinemaController {
         require "view/films/detailFilm.php";
     }
 
+    // -------------
+    // --- genres ---
+    // -------------
+
     // lister les genres
     public function listGenres() {
         $pdo = Connect::seConnecter();
@@ -81,6 +90,10 @@ class CinemaController {
         require "view/genres/detailGenre.php";
 
     }
+
+    // -------------
+    // --- acteurs ---
+    // -------------
 
     // lister les acteurs
     public function listActeurs() {
@@ -109,6 +122,11 @@ class CinemaController {
 
         require "view/acteurs/detailActeur.php";
     }
+
+    // --------------------
+    // --- réalisateurs ---
+    // --------------------
+
 
     // lister les réalisateurs
     public function listRealisateurs() {
@@ -140,6 +158,10 @@ class CinemaController {
         require "view/realisateurs/detailRealisateur.php";
     }
 
+    // -------------
+    // --- rôles ---
+    // -------------
+
     // lister les rôles
     public function listRoles() {
         $pdo = Connect::seConnecter();
@@ -156,7 +178,6 @@ class CinemaController {
     }
 
     // détail d'un rôle
-
     public function detailRole($id) {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
@@ -171,6 +192,17 @@ class CinemaController {
         require "view/roles/detailRole.php";
     }
 
+    // ajout d'un rôle
+    public function ajouterRole() {
+        // echo "test";
+        $pdo = Connect::seConnecter();
+        $requete = $pdo->prepare("
+        // requete
+        ");
+        // $requete->execute();
+
+        require "view/roles/ajoutRole.php";
+    }
   
 
 }

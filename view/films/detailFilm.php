@@ -13,7 +13,6 @@ ob_start(); ?>
             <th>DUREE</th>
             <th>SYNOPSIS</th>
             <th>NOTE</th>
-            <th>GENRE(S)</th>
 
         </tr>
     </thead>
@@ -26,10 +25,25 @@ ob_start(); ?>
                 <td><?= $film["duree_mn_film"] ?></td>
                 <td><?= $film["synopsis_film"] ?></td>
                 <td><?= $film["note_film"] ?></td>
-                <td><?= $film["nom_genre"] ?></td>
             </tr>
     <?php } ?>
     </tbody>
+</table>
+
+<table>
+    <thead>
+            <tr>
+                <th>GENRE(S)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            foreach($requeteCasting->fetchAll() as $film) { ?>
+                <tr>
+                    <td><?= $film["nom_genre"] ?></td>
+                </tr>
+        <?php } ?>
+        </tbody>
 </table>
 
 <table>

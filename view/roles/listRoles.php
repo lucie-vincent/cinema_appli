@@ -22,6 +22,10 @@
     </tbody>
 </table>
 
+<br>
+
+<a href="index.php?action=ajoutRole">Ajouter un rôle</a>
+
 
 <?php
 
