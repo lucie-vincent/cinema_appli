@@ -8,6 +8,7 @@ ob_start(); ?>
         <tr>
             <th>Prénom Nom</th>
             <th>date de naissance</th>
+            <th>Genre</th>
             <tr>
                 </thead>
                 <tbody>
@@ -16,6 +17,7 @@ ob_start(); ?>
             <tr>
                 <td><?= $acteur["acteur_actrice"] ?></td>
                 <td><?= $acteur["date_naissance_personne"] ?></td>
+                <td><?= $acteur["sexe_personne"] ?></td>
             </tr>
             <?php } ?>
         </tbody>

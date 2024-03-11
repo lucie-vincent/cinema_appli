@@ -21,7 +21,7 @@ ob_start(); ?>
         foreach($requete->fetchAll() as $film) { ?>
             <tr>
                 <td><?= $film["titre_film"] ?></td>
-                <td><?= $film["annee_sortie_film"] ?></td>
+                <td><?= $film["date_sortie_france_film"] ?></td>
             </tr>
     <?php } ?>
     </tbody>

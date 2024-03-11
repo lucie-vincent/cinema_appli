@@ -7,6 +7,7 @@
         <tr>
             <th>Prénom Nom</th>
             <th>date de naissance</th>
+            <th>Genre</th>
         <tr>
     </thead>
     <tbody>
@@ -15,6 +16,7 @@
             <tr>
                 <td><?= $realisateur["realisateur_realisatrice"] ?></td>
                 <td><?= $realisateur["date_naissance_personne"] ?></td>
+                <td><?= $realisateur["sexe_personne"] ?></td>
             </tr>
     <?php } ?>
     </tbody>

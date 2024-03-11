@@ -19,7 +19,6 @@ ob_start(); ?>
         foreach($requete->fetchAll() as $genre) { ?>
             <tr>
                 <td><?= $genre["nom_genre"] ?></td>
-                <!-- <td><?= $film["infos_genre"] ?></td> -->
             </tr>
     <?php } ?>
     </tbody>

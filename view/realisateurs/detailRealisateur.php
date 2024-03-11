@@ -10,7 +10,9 @@ ob_start(); ?>
             <th>PRENOM NOM</th>
             <th>GENRE</th>
             <th>DATE DE NAISSANCE</th>
-            <!-- <th>INFOS PERSONNELLES</th> -->
+            <th>PAYS DE NAISSANCE</th>
+            <th>LIEU D'HABITATION</th>
+            <th>INFORMATIONS PERSONNELLES</th>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +22,9 @@ ob_start(); ?>
                 <td><?= $realisateur["realisateur_realisatrice"] ?></td>
                 <td><?= $realisateur["sexe_personne"] ?></td>
                 <td><?= $realisateur["date_naissance_personne"] ?></td>
+                <td><?= $realisateur["pays_naissance"] ?></td>
+                <td><?= $realisateur["lieu_habitation"] ?></td>
+                <td><?= $realisateur["informations_personnelles"] ?></td>
             </tr>
     <?php } ?>
     </tbody>

@@ -12,6 +12,9 @@ ob_start(); ?>
             <th>ANNEE SORTIE</th>
             <th>DUREE</th>
             <th>SYNOPSIS</th>
+            <th>NOTE</th>
+            <th>GENRE(S)</th>
+
         </tr>
     </thead>
     <tbody>
@@ -19,9 +22,11 @@ ob_start(); ?>
         foreach($requetefilm->fetchAll() as $film) { ?>
             <tr>
                 <td><?= $film["titre_film"] ?></td>
-                <td><?= $film["annee_sortie_film"] ?></td>
+                <td><?= $film["date_sortie_france_film"] ?></td>
                 <td><?= $film["duree_mn_film"] ?></td>
                 <td><?= $film["synopsis_film"] ?></td>
+                <td><?= $film["note_film"] ?></td>
+                <td><?= $film["nom_genre"] ?></td>
             </tr>
     <?php } ?>
     </tbody>

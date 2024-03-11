@@ -30,10 +30,13 @@ class CinemaController {
         // les injections SQL. Il peut y avoir une injection car une variable est utilisée 
         // ":id"
         $requetefilm = $pdo->prepare("
-            SELECT  film.titre_film, film.annee_sortie_film, film.duree_mn_film, 
-                    film.synopsis_film
-            FROM film
-            WHERE film.id_film = :id
+        SELECT  film.titre_film, film.date_sortie_france_film, film.duree_mn_film, 
+                film.synopsis_film, film.note_film,
+                genre_film.nom_genre
+        FROM film
+            INNER JOIN definir ON film.id_film = definir.id_film
+            INNER JOIN genre_film ON definir.id_genre = genre_film.id_genre
+        WHERE film.id_film = :id
         ");
         // on exécute la requête
         $requetefilm->execute([":id" => $id]);
@@ -96,7 +99,8 @@ class CinemaController {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
             SELECT  CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS 
-                    acteur_actrice, personne.sexe_personne, personne.date_naissance_personne
+                    acteur_actrice, personne.sexe_personne, personne.date_naissance_personne,
+                    personne.pays_naissance, personne.lieu_habitation, personne.informations_personnelles
             FROM personne
                 INNER JOIN acteur ON personne.id_personne = acteur.id_personne
             WHERE acteur.id_acteur =  :id
@@ -124,7 +128,9 @@ class CinemaController {
         $requete = $pdo->prepare("
             SELECT  CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS 
                     realisateur_realisatrice,
-                    personne.sexe_personne, personne.date_naissance_personne
+                    personne.sexe_personne, personne.date_naissance_personne,
+                    personne.pays_naissance, personne.lieu_habitation, 
+                    personne.informations_personnelles
             FROM personne
 	            INNER JOIN realisateur ON personne.id_personne = realisateur.id_personne
             WHERE realisateur.id_realisateur = :id
