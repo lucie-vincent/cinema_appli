@@ -38,9 +38,9 @@ ob_start(); ?>
         </thead>
         <tbody>
             <?php
-            foreach($requeteCasting->fetchAll() as $film) { ?>
+            foreach($requetefilmGenre->fetchAll() as $genre) { ?>
                 <tr>
-                    <td><?= $film["nom_genre"] ?></td>
+                    <td><?= $genre["nom_genre"] ?></td>
                 </tr>
         <?php } ?>
         </tbody>

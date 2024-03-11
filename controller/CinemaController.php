@@ -30,6 +30,7 @@ class CinemaController {
     public function detailFilm($id) {
         // on fait appel à la fonction seConnecter dans le nameSpace Connect (=Connect.php)
         $pdo = Connect::seConnecter();
+        // afficher les infos du films
         // on prepare la requête 
         // cette fois on a besoin de préparer puis d'exécuter la requête pour éviter
         // les injections SQL. Il peut y avoir une injection car une variable est utilisée 
@@ -46,6 +47,18 @@ class CinemaController {
         // on exécute la requête
         $requetefilm->execute([":id" => $id]);
 
+        //afficher le genre
+        $requetefilmGenre = $pdo->prepare("
+        SELECT genre_film.nom_genre
+        FROM genre_film
+	        INNER JOIN definir ON genre_film.id_genre = definir.id_genre
+	        INNER JOIN film ON definir.id_film = film.id_film
+        WHERE film.id_film = :id
+        ");
+
+        $requetefilmGenre->execute([":id" => $id]);
+
+        //afficher le casting
         $requeteCasting = $pdo->prepare("
             SELECT  role.nom_personnage, 
                     CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice
@@ -58,6 +71,8 @@ class CinemaController {
         ");
         // on exécute la requête
         $requeteCasting->execute([":id" => $id]);
+
+
         // on relie la vue qui nous intéressent dans le dossier view
         require "view/films/detailFilm.php";
     }
@@ -167,8 +182,8 @@ class CinemaController {
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
         SELECT role.nom_personnage, film.titre_film, CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice
-            FROM role
-					 INNER JOIN jouer ON role.id_role = jouer.id_role
+        FROM role
+			INNER JOIN jouer ON role.id_role = jouer.id_role
                 INNER JOIN acteur ON jouer.id_acteur = acteur.id_acteur
                 INNER JOIN personne ON acteur.id_personne = personne.id_personne
                 INNER JOIN film ON jouer.id_film = film.id_film
