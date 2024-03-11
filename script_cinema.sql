@@ -208,6 +208,51 @@ INSERT INTO `role` (`id_role`, `nom_personnage`) VALUES
 	(10, 'Mary CORLEONE'),
 	(11, 'Kay ADAMS'),
 	(12, '"Sport" MATTHEW');
+	
+	
+-- Ajouter une nouvelle colonne genre_description
+ALTER TABLE genre_film
+ADD COLUMN genre_description TEXT;
+
+-- Mettre à jour la colonne genre_description avec les descriptions des genres
+UPDATE genre_film
+SET genre_description = 
+    CASE 
+        WHEN nom_genre = 'Road movie' THEN 'Un genre de film où le voyage est au cœur de l\'intrigue, mettant en avant les personnages principaux traversant des paysages variés, souvent sur la route, souvent accompagné de découvertes personnelles et d\'expériences marquantes.'
+        WHEN nom_genre = 'Peplum dramatique' THEN 'Un genre de film dramatique historique se déroulant dans l\'Antiquité, caractérisé par des histoires épiques, des décors somptueux, des costumes élaborés et des intrigues politiques ou sociales.'
+        WHEN nom_genre = 'Science-fiction' THEN 'Un genre de film explorant des concepts imaginaires basés sur la science et la technologie, souvent situés dans le futur ou des mondes alternatifs, mettant en scène des voyages spatiaux, des extraterrestres, des avancées technologiques et des questions philosophiques.'
+        WHEN nom_genre = 'Thriller' THEN 'Un genre de film caractérisé par une tension intense, des rebondissements inattendus et des scénarios captivants, mettant souvent en scène des crimes, des enquêtes policières, des conspirations ou des menaces à la sécurité.'
+        WHEN nom_genre = 'Drame historique' THEN 'Un genre de film basé sur des événements historiques réels ou des époques passées, mettant en lumière des personnages et des situations réalistes tout en explorant des thèmes sociaux, politiques ou culturels pertinents.'
+        WHEN nom_genre = 'Drame' THEN 'Un genre de film axé sur le développement émotionnel des personnages, explorant des situations humaines complexes, des relations interpersonnelles et des conflits personnels ou sociaux.'
+        WHEN nom_genre = 'Néo-noir' THEN 'Un sous-genre du film noir classique, caractérisé par une esthétique sombre et stylisée, des personnages ambigus, des intrigues complexes et une atmosphère urbaine souvent teintée de désespoir ou de corruption.'
+        WHEN nom_genre = 'Documentaire' THEN 'Un genre de film basé sur la réalité, utilisant des images réelles et des témoignages pour explorer des sujets variés, allant de l\'histoire et de la politique à la nature et à la culture, offrant un regard instructif sur le monde qui nous entoure.'
+        WHEN nom_genre = 'Gangster' THEN 'Un genre de film centré sur le crime organisé et la vie des criminels, souvent situé dans des milieux urbains, mettant en scène des personnages charismatiques, des confrontations violentes et des thèmes de pouvoir, de trahison et de loyauté.'
+    END;
+
+
+-- Ajouter une nouvelle colonne 'description'
+ALTER TABLE role
+ADD COLUMN description TEXT;
+
+-- Mettre à jour la colonne 'description' avec les descriptions des personnages
+UPDATE role
+SET description = 
+    CASE 
+        WHEN nom_personnage = 'Louise SAWYER' THEN 'Une femme courageuse fuyant une vie étouffante, elle se lance dans une aventure épique de liberté et de découverte de soi.'
+        WHEN nom_personnage = 'Thelma DICKINSON' THEN 'Initialement timide et soumise, elle trouve sa force intérieure lorsqu\'elle défie les conventions et prend son destin en main.'
+        WHEN nom_personnage = 'Hal SLOCOMBE' THEN 'Un personnage mystérieux et charismatique, il est le guide spirituel et protecteur des protagonistes, apportant sagesse et conseils dans leur voyage.'
+        WHEN nom_personnage = 'Maximus DECIMUS MERIDIUS' THEN 'Un général romain noble et courageux, déterminé à venger sa famille et à restaurer l\'honneur de son empire dans un monde de corruption et de trahison.'
+        WHEN nom_personnage = 'Commode' THEN 'Un empereur cruel et ambitieux, obsédé par le pouvoir et prêt à tout pour maintenir son règne, même au prix du sang et de la trahison.'
+        WHEN nom_personnage = 'Rick DECKARD' THEN 'Un détective désabusé et solitaire chargé de traquer et de retirer les réplicants, se retrouvant confronté à des questions morales et existentielles dans un monde dystopique.'
+        WHEN nom_personnage = 'Sean YOUNG' THEN 'Une femme énigmatique et séduisante, entourée de mystère et de danger, elle intrigue et fascine ceux qui croisent son chemin.'
+        WHEN nom_personnage = 'Marguerite de CARROUGES' THEN 'Une femme noble et déterminée, prête à défier les normes sociales et à se battre pour la justice dans une époque d\'injustice et d\'oppression.'
+        WHEN nom_personnage = 'Jacques le GRIS' THEN 'Un chevalier charismatique et manipulatif, expert dans l\'art de la dissimulation et du complot, il représente le côté obscur de la chevalerie.'
+        WHEN nom_personnage = 'Mary CORLEONE' THEN 'Une jeune femme courageuse et vulnérable, prise au piège dans les intrigues familiales et cherchant désespérément à échapper à son destin tragique.'
+        WHEN nom_personnage = 'Kay ADAMS' THEN 'Une femme forte et déterminée, naviguant avec grâce et intelligence dans un monde d\'hommes et de pouvoir, tout en préservant son intégrité et sa dignité.'
+        WHEN nom_personnage = '"Sport" MATTHEW' THEN 'Un personnage trouble et ambigu, oscillant entre loyauté et trahison, il incarne les contradictions et les compromis de la vie dans le monde du crime organisé.'
+    END;
+
+
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

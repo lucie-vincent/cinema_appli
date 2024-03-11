@@ -9,7 +9,7 @@ ob_start(); ?>
     <thead>
         <tr>
             <th>NOM DU GENRE</th>
-            <!-- <th>INFOS</th> -->
+            <th>DESCRPTION</th>
 
         </tr>
         <tr>
@@ -19,6 +19,7 @@ ob_start(); ?>
         foreach($requete->fetchAll() as $genre) { ?>
             <tr>
                 <td><?= $genre["nom_genre"] ?></td>
+                <td><?= $genre["genre_description"] ?></td>
             </tr>
     <?php } ?>
     </tbody>

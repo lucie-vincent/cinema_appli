@@ -96,7 +96,7 @@ class CinemaController {
     public function detailGenre($id) {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-            SELECT genre_film.nom_genre, genre_film.id_genre
+            SELECT genre_film.nom_genre, genre_film.genre_description, genre_film.id_genre
             FROM genre_film
             WHERE genre_film.id_genre = :id
         ");
@@ -210,7 +210,8 @@ class CinemaController {
     public function detailRole($id) {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-            SELECT role.nom_personnage, film.titre_film, role.id_role, film.id_film
+            SELECT  role.nom_personnage, role.description, film.titre_film, 
+                    role.id_role, film.id_film
             FROM role
                 INNER JOIN jouer ON role.id_role = jouer.id_role
                 INNER JOIN film ON jouer.id_film = film.id_film

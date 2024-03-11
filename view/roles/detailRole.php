@@ -9,8 +9,8 @@ ob_start(); ?>
     <thead>
         <tr>
             <th>NOM DU PERSONNAGE</th>
+            <th>INFOS</th>
             <th>FILM</th>
-            <!-- <th>INFOS</th> -->
 
         </tr>
         <tr>
@@ -20,6 +20,7 @@ ob_start(); ?>
         foreach($requete->fetchAll() as $role) { ?>
             <tr>
                 <td><?= $role["nom_personnage"] ?></td>
+                <td><?= $role["description"] ?></td>
                 <td><a href="index.php?action=detailFilm&id=<?=$role['id_film']?>"> <?= $role["titre_film"] ?> </a></td>
             </tr>
     <?php } ?>
