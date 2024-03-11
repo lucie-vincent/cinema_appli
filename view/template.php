@@ -16,6 +16,7 @@ on exploitera la temporisation de sortie -->
         <a href="index.php?action=listActeurs">Acteurs</a>
         <a href="index.php?action=listRealisateurs">Réalisateurs</a>
         <a href="index.php?action=listFilms">Films</a>
+        <a href="index.php?action=listRoles">Rôles</a>
     </nav>
     <div id="wrapper">
         <main>

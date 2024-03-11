@@ -192,7 +192,8 @@ class CinemaController {
     public function listRoles() {
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-        SELECT role.nom_personnage, film.titre_film, CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice
+        SELECT  role.nom_personnage, film.titre_film, role.id_role, film.id_film, acteur.id_acteur,
+                CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice
         FROM role
 			INNER JOIN jouer ON role.id_role = jouer.id_role
                 INNER JOIN acteur ON jouer.id_acteur = acteur.id_acteur
@@ -207,7 +208,7 @@ class CinemaController {
     public function detailRole($id) {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-            SELECT role.nom_personnage, film.titre_film
+            SELECT role.nom_personnage, film.titre_film, role.id_role, film.id_film
             FROM role
                 INNER JOIN jouer ON role.id_role = jouer.id_role
                 INNER JOIN film ON jouer.id_film = film.id_film

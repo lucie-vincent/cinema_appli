@@ -20,7 +20,7 @@ ob_start(); ?>
         foreach($requete->fetchAll() as $role) { ?>
             <tr>
                 <td><?= $role["nom_personnage"] ?></td>
-                <td><?= $role["titre_film"] ?></td>
+                <td><a href="index.php?action=detailFilm&id=<?=$role['id_film']?>"> <?= $role["titre_film"] ?> </a></td>
             </tr>
     <?php } ?>
     </tbody>
