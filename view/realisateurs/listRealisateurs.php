@@ -14,7 +14,7 @@
         <?php
         foreach($requete->fetchAll() as $realisateur) { ?>
             <tr>
-                <td><?= $realisateur["realisateur_realisatrice"] ?></td>
+                <td> <a href="index.php?action=detailRealisateur&id=<?=$realisateur['id_realisateur']?>"> <?= $realisateur["realisateur_realisatrice"] ?> </a></td>
                 <td><?= $realisateur["date_naissance_personne"] ?></td>
                 <td><?= $realisateur["sexe_personne"] ?></td>
             </tr>

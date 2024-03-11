@@ -20,7 +20,7 @@ USE `cinema_appli`;
 
 -- Listage de la structure de la table exercice_cinema. acteur
 CREATE TABLE IF NOT EXISTS `acteur` (
-  `id_acteur` int NOT NULL,
+  `id_acteur` int NOT NULL AUTO_INCREMENT,
   `id_personne` int NOT NULL,
   PRIMARY KEY (`id_acteur`),
   UNIQUE KEY `id_personne` (`id_personne`),
@@ -68,7 +68,7 @@ INSERT INTO `definir` (`id_film`, `id_genre`) VALUES
 
 -- Listage de la structure de la table exercice_cinema. film
 CREATE TABLE IF NOT EXISTS `film` (
-  `id_film` int NOT NULL,
+  `id_film` int NOT NULL AUTO_INCREMENT,
   `titre_film` varchar(50) NOT NULL,
   `date_sortie_france_film` date NOT NULL,
   `duree_min_film` int NOT NULL,
@@ -94,7 +94,7 @@ INSERT INTO `film` (`id_film`, `titre_film`, `date_sortie_france_film`, `duree_m
 
 -- Listage de la structure de la table exercice_cinema. genre_film
 CREATE TABLE IF NOT EXISTS `genre_film` (
-  `id_genre` int NOT NULL,
+  `id_genre` int NOT NULL AUTO_INCREMENT,
   `nom_genre` varchar(50) NOT NULL,
   PRIMARY KEY (`id_genre`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -141,7 +141,7 @@ INSERT INTO `jouer` (`id_film`, `id_acteur`, `id_role`) VALUES
 
 -- Listage de la structure de la table exercice_cinema. personne
 CREATE TABLE IF NOT EXISTS `personne` (
-  `id_personne` int NOT NULL,
+  `id_personne` int NOT NULL AUTO_INCREMENT,
   `prenom_personne` varchar(50) NOT NULL,
   `nom_personne` varchar(50) NOT NULL,
   `sexe_personne` varchar(50) NOT NULL,
@@ -172,7 +172,7 @@ INSERT INTO `personne` (`id_personne`, `prenom_personne`, `nom_personne`, `sexe_
 
 -- Listage de la structure de la table exercice_cinema. realisateur
 CREATE TABLE IF NOT EXISTS `realisateur` (
-  `id_realisateur` int NOT NULL,
+  `id_realisateur` int NOT NULL AUTO_INCREMENT,
   `id_personne` int NOT NULL,
   PRIMARY KEY (`id_realisateur`),
   UNIQUE KEY `id_personne` (`id_personne`),
@@ -189,7 +189,7 @@ INSERT INTO `realisateur` (`id_realisateur`, `id_personne`) VALUES
 
 -- Listage de la structure de la table exercice_cinema. role
 CREATE TABLE IF NOT EXISTS `role` (
-  `id_role` int NOT NULL,
+  `id_role` int NOT NULL AUTO_INCREMENT,
   `nom_personnage` varchar(50) NOT NULL,
   PRIMARY KEY (`id_role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

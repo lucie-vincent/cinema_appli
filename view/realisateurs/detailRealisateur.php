@@ -17,7 +17,7 @@ ob_start(); ?>
     </thead>
     <tbody>
         <?php
-        foreach($requete->fetchAll() as $realisateur) { ?>
+        foreach($requeteRealisateur->fetchAll() as $realisateur) { ?>
             <tr>
                 <td><?= $realisateur["realisateur_realisatrice"] ?></td>
                 <td><?= $realisateur["sexe_personne"] ?></td>
@@ -29,6 +29,16 @@ ob_start(); ?>
     <?php } ?>
     </tbody>
 </table>
+
+<h2> Filmographie </h2>
+
+<ul>
+    <?php foreach($requeteFilmographie->fetchAll() as $filmographie) { ?>
+        <li>
+            <a href="index.php?action=detailGenre&id=<?=$filmographie['id_film']?>"> <?= $filmographie["titre_film"] ?> </a>
+        </li>
+        <?php } ?>
+</ul>
 
 <?php
 

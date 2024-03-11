@@ -6,9 +6,9 @@ use Model\Connect;
 
 class CinemaController {
 
-    // -------------
-    // --- films ---
-    // -------------
+            // -------------
+            // --- films ---
+            // -------------
 
     // lister les films
     public function listFilms() {
@@ -36,32 +36,30 @@ class CinemaController {
         // les injections SQL. Il peut y avoir une injection car une variable est utilisée 
         // ":id"
         $requetefilm = $pdo->prepare("
-        SELECT  film.titre_film, film.date_sortie_france_film, film.duree_mn_film, 
-                film.synopsis_film, film.note_film,
-                genre_film.nom_genre
-        FROM film
-            INNER JOIN definir ON film.id_film = definir.id_film
-            INNER JOIN genre_film ON definir.id_genre = genre_film.id_genre
-        WHERE film.id_film = :id
+            SELECT titre_film, date_sortie_france_film, duree_mn_film,
+                synopsis_film, note_film
+            FROM film
+            WHERE film.id_film = :id
         ");
         // on exécute la requête
         $requetefilm->execute([":id" => $id]);
 
         //afficher le genre
         $requetefilmGenre = $pdo->prepare("
-        SELECT genre_film.nom_genre
-        FROM genre_film
-	        INNER JOIN definir ON genre_film.id_genre = definir.id_genre
-	        INNER JOIN film ON definir.id_film = film.id_film
-        WHERE film.id_film = :id
+            SELECT genre_film.nom_genre, genre_film.id_genre
+            FROM genre_film
+                INNER JOIN definir ON genre_film.id_genre = definir.id_genre
+                INNER JOIN film ON definir.id_film = film.id_film
+            WHERE film.id_film = :id
         ");
 
         $requetefilmGenre->execute([":id" => $id]);
 
         //afficher le casting
         $requeteCasting = $pdo->prepare("
-            SELECT  role.nom_personnage, 
-                    CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice
+            SELECT  role.nom_personnage, role.id_role,
+                    CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice,
+                    acteur.id_acteur
             FROM role
                 INNER JOIN jouer ON role.id_role = jouer.id_role
                 INNER JOIN film ON jouer.id_film = film.id_film
@@ -77,15 +75,15 @@ class CinemaController {
         require "view/films/detailFilm.php";
     }
 
-    // -------------
-    // --- genres ---
-    // -------------
+            // --------------
+            // --- genres ---
+            // --------------
 
     // lister les genres
     public function listGenres() {
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-            SELECT nom_genre
+            SELECT genre_film.nom_genre, genre_film.id_genre
             FROM genre_film
         ");
 
@@ -96,7 +94,7 @@ class CinemaController {
     public function detailGenre($id) {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-            SELECT genre_film.nom_genre
+            SELECT genre_film.nom_genre, genre_film.id_genre
             FROM genre_film
             WHERE genre_film.id_genre = :id
         ");
@@ -106,17 +104,17 @@ class CinemaController {
 
     }
 
-    // -------------
-    // --- acteurs ---
-    // -------------
+            // ---------------
+            // --- acteurs ---
+            // ---------------
 
     // lister les acteurs
     public function listActeurs() {
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-        SELECT	* , CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice
-        FROM personne
-        INNER JOIN acteur ON personne.id_personne = acteur.id_personne
+            SELECT	* , CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice
+            FROM personne
+            INNER JOIN acteur ON personne.id_personne = acteur.id_personne
         ");
 
         require "view/acteurs/listActeurs.php";
@@ -138,18 +136,20 @@ class CinemaController {
         require "view/acteurs/detailActeur.php";
     }
 
-    // --------------------
-    // --- réalisateurs ---
-    // --------------------
+            // --------------------
+            // --- réalisateurs ---
+            // --------------------
 
 
     // lister les réalisateurs
     public function listRealisateurs() {
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-            SELECT	*, CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS realisateur_realisatrice
-            FROM personne
-                INNER JOIN acteur ON personne.id_personne = acteur.id_acteur
+            SELECT CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS 
+                    realisateur_realisatrice, personne.sexe_personne, personne.date_naissance_personne,
+                    realisateur.id_realisateur
+            FROM realisateur
+            INNER JOIN personne ON realisateur.id_personne = personne.id_personne
         ");
 
         require "view/realisateurs/listRealisateurs.php";
@@ -158,24 +158,35 @@ class CinemaController {
     // détail d'un réalisateur
     public function detailRealisateur($id) {
         $pdo = Connect::seConnecter();
-        $requete = $pdo->prepare("
+        // infos réalisateurs
+        $requeteRealisateur = $pdo->prepare("
             SELECT  CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS 
                     realisateur_realisatrice,
                     personne.sexe_personne, personne.date_naissance_personne,
                     personne.pays_naissance, personne.lieu_habitation, 
-                    personne.informations_personnelles
+                    personne.informations_personnelles,
+                    realisateur.id_realisateur
             FROM personne
 	            INNER JOIN realisateur ON personne.id_personne = realisateur.id_personne
             WHERE realisateur.id_realisateur = :id
         ");
-        $requete->execute([":id"=>$id]);
+        $requeteRealisateur->execute([":id"=>$id]);
+
+        //filmographie
+        $requeteFilmographie = $pdo->prepare("
+            SELECT  film.titre_film, film.id_film
+            FROM film
+                INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
+            WHERE realisateur.id_realisateur = :id
+        ");
+        $requeteFilmographie->execute([":id"=>$id]);
 
         require "view/realisateurs/detailRealisateur.php";
     }
 
-    // -------------
-    // --- rôles ---
-    // -------------
+            // -------------
+            // --- rôles ---
+            // -------------
 
     // lister les rôles
     public function listRoles() {

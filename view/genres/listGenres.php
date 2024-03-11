@@ -6,7 +6,7 @@
 <ul>
     <?php foreach($requete->fetchAll() as $genre) { ?>
         <li>
-            <?= $genre["nom_genre"] ?>
+            <a href="index.php?action=detailGenre&id=<?=$genre['id_genre']?>"> <?= $genre["nom_genre"] ?> </a>
         </li>
         <?php } ?>
 </ul>

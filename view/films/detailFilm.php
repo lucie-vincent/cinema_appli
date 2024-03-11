@@ -9,8 +9,8 @@ ob_start(); ?>
     <thead>
         <tr>
             <th>TITRE</th>
-            <th>ANNEE SORTIE</th>
-            <th>DUREE</th>
+            <th>DATE SORTIE (France)</th>
+            <th>DUREE (mn)</th>
             <th>SYNOPSIS</th>
             <th>NOTE</th>
 
@@ -40,7 +40,7 @@ ob_start(); ?>
             <?php
             foreach($requetefilmGenre->fetchAll() as $genre) { ?>
                 <tr>
-                    <td><?= $genre["nom_genre"] ?></td>
+                    <td> <a href="index.php?action=detailGenre&id=<?=$genre['id_genre'] ?> "> <?= $genre["nom_genre"] ?> </a></td>
                 </tr>
         <?php } ?>
         </tbody>
@@ -57,8 +57,8 @@ ob_start(); ?>
             <?php
             foreach($requeteCasting->fetchAll() as $casting) { ?>
                 <tr>
-                    <td><?= $casting["nom_personnage"] ?></td>
-                    <td><?= $casting["acteur_actrice"] ?></td>
+                    <td> <a href="index.php?action=detailRole&id=<?=$casting['id_role']?>" > <?= $casting["nom_personnage"] ?> </a></td>
+                    <td> <a href="index.php?action=detailActeur&id=<?=$casting['id_acteur']?>" > <?= $casting["acteur_actrice"]?> </a></td>
                 </tr>
         <?php } ?>
         </tbody>
