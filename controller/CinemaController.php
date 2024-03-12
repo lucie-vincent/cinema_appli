@@ -59,7 +59,7 @@ class CinemaController {
 
         //afficher le casting
         $requeteCasting = $pdo->prepare("
-            SELECT  role.nom_personnage, role.id_role,
+            SELECT  role.nom_role, role.id_role,
                     CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice,
                     acteur.id_acteur
             FROM role
@@ -73,7 +73,7 @@ class CinemaController {
         $requeteCasting->execute([":id" => $id]);
 
 
-        // on relie la vue qui nous intéressent dans le dossier view
+        // on relie la vue qui nous intéresse dans le dossier view
         require "view/films/detailFilm.php";
     }
 
@@ -194,13 +194,7 @@ class CinemaController {
     public function listRoles() {
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-        SELECT  role.nom_personnage, film.titre_film, role.id_role, film.id_film, acteur.id_acteur,
-                CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice
-        FROM role
-			INNER JOIN jouer ON role.id_role = jouer.id_role
-                INNER JOIN acteur ON jouer.id_acteur = acteur.id_acteur
-                INNER JOIN personne ON acteur.id_personne = personne.id_personne
-                INNER JOIN film ON jouer.id_film = film.id_film
+            SELECT * FROM role
         ");
 
         require "view/roles/listRoles.php";
@@ -210,12 +204,17 @@ class CinemaController {
     public function detailRole($id) {
         $pdo = Connect::seConnecter();
         $requete = $pdo->prepare("
-            SELECT  role.nom_personnage, role.description, film.titre_film, 
-                    role.id_role, film.id_film
+            SELECT  role.nom_role, role.description_role, role.id_role, film.titre_film, 
+                    film.id_film, acteur.id_acteur,
+                    CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice
             FROM role
                 INNER JOIN jouer ON role.id_role = jouer.id_role
+                INNER JOIN acteur ON jouer.id_acteur = acteur.id_acteur
+                INNER JOIN personne ON acteur.id_personne = personne.id_personne
                 INNER JOIN film ON jouer.id_film = film.id_film
-            WHERE role.id_role = :id
+            WHERE role.id_role =:id
+
+
         ");
         $requete->execute([":id"=>$id]);
 
@@ -224,16 +223,48 @@ class CinemaController {
 
     // ajout d'un rôle
     public function ajouterRole() {
-        // echo "test";
-        $pdo = Connect::seConnecter();
-        $requete = $pdo->prepare("
-        INSERT INTO role (nom_personnage)
-        VALUES (':roleAdded);
-        ");
-        $requete->execute([":roleAdded=>$roleAdded"]);
+        
+        // si on détecte le submit '$_POST["submit"])
+        if(isset($_POST["submit"])) {
+            // alors on se connecte à la base de données
+            $pdo = Connect::seConnecter();
+            
+            // on filtre le champ rôle du formulaire (filter_input)
+            $nomRole = filter_input(INPUT_POST, "nomRole", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            // $descriptionRole = filter_input(INPUT_POST, "descriptionRole", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            // si le filtre est valide
+            if($nomRole) {
+                // on prépare la requête d'insertion (INSERT INTO...VALUES)
+                $requeteNomRole = $pdo->prepare("
+                    INSERT INTO role (nom_role)
+                    VALUES (:nomRole);
+                ");
+                
+                // on exécute la requête en faisant passer le tableau d'arguments
+                $requeteNomRole->execute([":nomRole"=>$nomRole]);
+                
+                // on fait la redirection vers la liste des roles (header("Location: index.php..."))
+                header('Location: index.php?action=listRoles');
+                die();
+            }
 
-        require "view/roles/ajoutRole.php";
+            // if($descriptionRole) {
+            //     $requeteDescriptionRole = $pdo->prepare("
+            //     INSERT INTO role (description_role)
+            //     VALUES (:descriptionRole);
+            //     ");
+
+            //     $requeteDescriptionRole->execute(["descriptionRole"=>$descriptionRole]);
+            
+            //     header('Location: index.php?action=listRoles');
+            //     die();
+            // }
+        }
+        // on relie la vue qui nous intéresse dans le dossier view
+        require "view/roles/ajouterRole.php";
     }
   
+
 
 }

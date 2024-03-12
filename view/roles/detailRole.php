@@ -10,6 +10,7 @@ ob_start(); ?>
         <tr>
             <th>NOM DU PERSONNAGE</th>
             <th>INFOS</th>
+            <th>ACTEUR/ACTRICE</th>
             <th>FILM</th>
 
         </tr>
@@ -19,9 +20,10 @@ ob_start(); ?>
         <?php
         foreach($requete->fetchAll() as $role) { ?>
             <tr>
-                <td><?= $role["nom_personnage"] ?></td>
-                <td><?= $role["description"] ?></td>
-                <td><a href="index.php?action=detailFilm&id=<?=$role['id_film']?>"> <?= $role["titre_film"] ?> </a></td>
+                <td><?= $role["nom_role"] ?></td>
+                <td><?= $role["description_role"] ?></td>
+                <td><a href="index.php?action=detailActeur&id=<?=$role['id_acteur']?>"> <?= $role["acteur_actrice"]?> </a></td>
+                <td><a href="index.php?action=detailFilm&id=<?=$role['id_film']?>"> <?= $role["titre_film"]?> </a></td>
             </tr>
     <?php } ?>
     </tbody>
@@ -30,8 +32,8 @@ ob_start(); ?>
 
 <?php
 
-$titre = "Détail de " . $role["nom_personnage"] ;
-$titre_secondaire = "Détail de " . $role["nom_personnage"];
+$titre = "Détail de " . $role["nom_role"] ;
+$titre_secondaire = "Détail de " . $role["nom_role"];
 $contenu = ob_get_clean();
 
 require "view/template.php";

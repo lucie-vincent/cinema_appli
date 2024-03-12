@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `film` (
   `date_sortie_france_film` date NOT NULL,
   `duree_min_film` int NOT NULL,
   `affiche_film` varchar(50) NOT NULL,
-  `synopsis_film` text,
+  `synopsis_film` VARCHAR(300) NOT NULL,
   `note_film` int DEFAULT NULL,
   `id_realisateur` int NOT NULL,
   PRIMARY KEY (`id_film`),
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `personne` (
   `date_naissance_personne` date NOT NULL,
   `pays_naissance` varchar(100) DEFAULT NULL,
   `lieu_habitation` varchar(100) DEFAULT NULL,
-  `informations_personnelles` text,
+  `informations_personnelles` varchar(50) NOT NULL,
   PRIMARY KEY (`id_personne`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -190,12 +190,12 @@ INSERT INTO `realisateur` (`id_realisateur`, `id_personne`) VALUES
 -- Listage de la structure de la table exercice_cinema. role
 CREATE TABLE IF NOT EXISTS `role` (
   `id_role` int NOT NULL AUTO_INCREMENT,
-  `nom_personnage` varchar(50) NOT NULL,
+  `nom_role` varchar(50) NOT NULL,
   PRIMARY KEY (`id_role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table exercice_cinema.role : ~9 rows (environ)
-INSERT INTO `role` (`id_role`, `nom_personnage`) VALUES
+INSERT INTO `role` (`id_role`, `nom_role`) VALUES
 	(1, 'Louise SAWYER'),
 	(2, 'Thelma DICKINSON'),
 	(3, 'Hal SLOCOMBE'),
@@ -212,7 +212,7 @@ INSERT INTO `role` (`id_role`, `nom_personnage`) VALUES
 	
 -- Ajouter une nouvelle colonne genre_description
 ALTER TABLE genre_film
-ADD COLUMN genre_description TEXT;
+ADD COLUMN genre_description VARCHAR(300);
 
 -- Mettre à jour la colonne genre_description avec les descriptions des genres
 UPDATE genre_film
@@ -232,24 +232,24 @@ SET genre_description =
 
 -- Ajouter une nouvelle colonne 'description'
 ALTER TABLE role
-ADD COLUMN description TEXT;
+ADD COLUMN description_role VARCHAR(300);
 
 -- Mettre à jour la colonne 'description' avec les descriptions des personnages
 UPDATE role
-SET description = 
+SET description_role = 
     CASE 
-        WHEN nom_personnage = 'Louise SAWYER' THEN 'Une femme courageuse fuyant une vie étouffante, elle se lance dans une aventure épique de liberté et de découverte de soi.'
-        WHEN nom_personnage = 'Thelma DICKINSON' THEN 'Initialement timide et soumise, elle trouve sa force intérieure lorsqu\'elle défie les conventions et prend son destin en main.'
-        WHEN nom_personnage = 'Hal SLOCOMBE' THEN 'Un personnage mystérieux et charismatique, il est le guide spirituel et protecteur des protagonistes, apportant sagesse et conseils dans leur voyage.'
-        WHEN nom_personnage = 'Maximus DECIMUS MERIDIUS' THEN 'Un général romain noble et courageux, déterminé à venger sa famille et à restaurer l\'honneur de son empire dans un monde de corruption et de trahison.'
-        WHEN nom_personnage = 'Commode' THEN 'Un empereur cruel et ambitieux, obsédé par le pouvoir et prêt à tout pour maintenir son règne, même au prix du sang et de la trahison.'
-        WHEN nom_personnage = 'Rick DECKARD' THEN 'Un détective désabusé et solitaire chargé de traquer et de retirer les réplicants, se retrouvant confronté à des questions morales et existentielles dans un monde dystopique.'
-        WHEN nom_personnage = 'Sean YOUNG' THEN 'Une femme énigmatique et séduisante, entourée de mystère et de danger, elle intrigue et fascine ceux qui croisent son chemin.'
-        WHEN nom_personnage = 'Marguerite de CARROUGES' THEN 'Une femme noble et déterminée, prête à défier les normes sociales et à se battre pour la justice dans une époque d\'injustice et d\'oppression.'
-        WHEN nom_personnage = 'Jacques le GRIS' THEN 'Un chevalier charismatique et manipulatif, expert dans l\'art de la dissimulation et du complot, il représente le côté obscur de la chevalerie.'
-        WHEN nom_personnage = 'Mary CORLEONE' THEN 'Une jeune femme courageuse et vulnérable, prise au piège dans les intrigues familiales et cherchant désespérément à échapper à son destin tragique.'
-        WHEN nom_personnage = 'Kay ADAMS' THEN 'Une femme forte et déterminée, naviguant avec grâce et intelligence dans un monde d\'hommes et de pouvoir, tout en préservant son intégrité et sa dignité.'
-        WHEN nom_personnage = '"Sport" MATTHEW' THEN 'Un personnage trouble et ambigu, oscillant entre loyauté et trahison, il incarne les contradictions et les compromis de la vie dans le monde du crime organisé.'
+        WHEN nom_role = 'Louise SAWYER' THEN 'Une femme courageuse fuyant une vie étouffante, elle se lance dans une aventure épique de liberté et de découverte de soi.'
+        WHEN nom_role = 'Thelma DICKINSON' THEN 'Initialement timide et soumise, elle trouve sa force intérieure lorsqu\'elle défie les conventions et prend son destin en main.'
+        WHEN nom_role = 'Hal SLOCOMBE' THEN 'Un personnage mystérieux et charismatique, il est le guide spirituel et protecteur des protagonistes, apportant sagesse et conseils dans leur voyage.'
+        WHEN nom_role = 'Maximus DECIMUS MERIDIUS' THEN 'Un général romain noble et courageux, déterminé à venger sa famille et à restaurer l\'honneur de son empire dans un monde de corruption et de trahison.'
+        WHEN nom_role = 'Commode' THEN 'Un empereur cruel et ambitieux, obsédé par le pouvoir et prêt à tout pour maintenir son règne, même au prix du sang et de la trahison.'
+        WHEN nom_role = 'Rick DECKARD' THEN 'Un détective désabusé et solitaire chargé de traquer et de retirer les réplicants, se retrouvant confronté à des questions morales et existentielles dans un monde dystopique.'
+        WHEN nom_role = 'Sean YOUNG' THEN 'Une femme énigmatique et séduisante, entourée de mystère et de danger, elle intrigue et fascine ceux qui croisent son chemin.'
+        WHEN nom_role = 'Marguerite de CARROUGES' THEN 'Une femme noble et déterminée, prête à défier les normes sociales et à se battre pour la justice dans une époque d\'injustice et d\'oppression.'
+        WHEN nom_role = 'Jacques le GRIS' THEN 'Un chevalier charismatique et manipulatif, expert dans l\'art de la dissimulation et du complot, il représente le côté obscur de la chevalerie.'
+        WHEN nom_role = 'Mary CORLEONE' THEN 'Une jeune femme courageuse et vulnérable, prise au piège dans les intrigues familiales et cherchant désespérément à échapper à son destin tragique.'
+        WHEN nom_role = 'Kay ADAMS' THEN 'Une femme forte et déterminée, naviguant avec grâce et intelligence dans un monde d\'hommes et de pouvoir, tout en préservant son intégrité et sa dignité.'
+        WHEN nom_role = '"Sport" MATTHEW' THEN 'Un personnage trouble et ambigu, oscillant entre loyauté et trahison, il incarne les contradictions et les compromis de la vie dans le monde du crime organisé.'
     END;
 
 
