@@ -14,6 +14,10 @@
 
 <a href="index.php?action=ajouterRole">Ajouter un rôle</a>
 
+<br>
+
+<a href="index.php?action=ajouterCasting">Ajouter un casting</a>
+
 
 <?php
 
