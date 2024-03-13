@@ -21,7 +21,7 @@ ob_start(); ?>
         foreach($requetefilm->fetchAll() as $film) { ?>
             <tr>
                 <td><?= $film["titre_film"] ?></td>
-                <td><?= $film["date_sortie_france_film"] ?></td>
+                <td><?= $film["dateFilm"] ?></td>
                 <td><?= $film["duree_mn_film"] ?></td>
                 <td><?= $film["synopsis_film"] ?></td>
                 <td><?= $film["note_film"] ?></td>
@@ -57,7 +57,7 @@ ob_start(); ?>
             <?php
             foreach($requeteCasting->fetchAll() as $casting) { ?>
                 <tr>
-                    <td> <a href="index.php?action=detailRole&id=<?=$casting['id_role']?>" > <?= $casting["nom_personnage"] ?> </a></td>
+                    <td> <a href="index.php?action=detailRole&id=<?=$casting['id_role']?>" > <?= $casting["nom_role"] ?> </a></td>
                     <td> <a href="index.php?action=detailActeur&id=<?=$casting['id_acteur']?>" > <?= $casting["acteur_actrice"]?> </a></td>
                 </tr>
         <?php } ?>

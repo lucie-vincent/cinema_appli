@@ -23,7 +23,7 @@ ob_start(); ?>
                 <td><?= $role["nom_role"] ?></td>
                 <td><?= $role["description_role"] ?></td>
                 <td><a href="index.php?action=detailActeur&id=<?=$role['id_acteur']?>"> <?= $role["acteur_actrice"]?> </a></td>
-                <td><a href="index.php?action=detailFilm&id=<?=$role['id_film']?>"> <?= $role["titre_film"]?> </a></td>
+                <td><a href="index.php?action=detailFilm&id=<?=$role['id_film']?>"> <?= $role["titre_film"]?> (<?= $role["annee_sortie"]?>) </a></td>
             </tr>
     <?php } ?>
     </tbody>

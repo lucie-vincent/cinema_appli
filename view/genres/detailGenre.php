@@ -10,13 +10,12 @@ ob_start(); ?>
         <tr>
             <th>NOM DU GENRE</th>
             <th>DESCRPTION</th>
-
         </tr>
         <tr>
     </thead>
     <tbody>
         <?php
-        foreach($requete->fetchAll() as $genre) { ?>
+        foreach($requeteGenre->fetchAll() as $genre) { ?>
             <tr>
                 <td><?= $genre["nom_genre"] ?></td>
                 <td><?= $genre["genre_description"] ?></td>
@@ -24,6 +23,16 @@ ob_start(); ?>
     <?php } ?>
     </tbody>
 </table>
+
+<h2> Liste des films </h2>
+
+<ul>
+    <?php foreach($requeteFilms->fetchAll() as $filmographie) { ?>
+        <li>
+            <a href="index.php?action=detailFilm&id=<?=$filmographie['id_film']?>"> <?= $filmographie["titre_film"] ?> (<?= $filmographie['anneeFilm']?>)</a>
+        </li>
+        <?php } ?>
+</ul>
 
 
 <?php

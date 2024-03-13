@@ -13,7 +13,7 @@ ob_start(); ?>
     <thead>
         <tr>
             <th>TITRE</th>
-            <th>ANNEE SORTIE</th>
+            <th>DATE DE SORTIE</th>
         <tr>
     </thead>
     <tbody>
@@ -21,7 +21,7 @@ ob_start(); ?>
         foreach($requete->fetchAll() as $film) { ?>
             <tr>
                 <td><a href="index.php?action=detailFilm&id=<?=$film['id_film']?>"> <?= $film["titre_film"] ?> </a></td>
-                <td><?= $film["dateFilm"] ?></td>
+                <td><?= $film["annee_sortie"] ?></td>
             </tr>
     <?php } ?>
     </tbody>

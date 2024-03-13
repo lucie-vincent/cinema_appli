@@ -21,7 +21,7 @@ ob_start(); ?>
             <tr>
                 <td><?= $realisateur["realisateur_realisatrice"] ?></td>
                 <td><?= $realisateur["sexe_personne"] ?></td>
-                <td><?= $realisateur["date_naissance_personne"] ?></td>
+                <td><?= $realisateur["date_naissance"] ?></td>
                 <td><?= $realisateur["pays_naissance"] ?></td>
                 <td><?= $realisateur["lieu_habitation"] ?></td>
                 <td><?= $realisateur["informations_personnelles"] ?></td>
@@ -35,7 +35,7 @@ ob_start(); ?>
 <ul>
     <?php foreach($requeteFilmographie->fetchAll() as $filmographie) { ?>
         <li>
-            <a href="index.php?action=detailGenre&id=<?=$filmographie['id_film']?>"> <?= $filmographie["titre_film"] ?> </a>
+            <a href="index.php?action=detailGenre&id=<?=$filmographie['id_film']?>"> <?= $filmographie["titre_film"] ?> (<?= $filmographie["annee_sortie"] ?>) </a>
         </li>
         <?php } ?>
 </ul>

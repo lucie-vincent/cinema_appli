@@ -17,11 +17,11 @@ ob_start(); ?>
     </thead>
     <tbody>
         <?php
-        foreach($requete->fetchAll() as $acteur) { ?>
+        foreach($requeteActeurs->fetchAll() as $acteur) { ?>
             <tr>
                 <td><?= $acteur["acteur_actrice"] ?></td>
                 <td><?= $acteur["sexe_personne"] ?></td>
-                <td><?= $acteur["date_naissance_personne"] ?></td>
+                <td><?= $acteur["date_naissance"] ?></td>
                 <td><?= $acteur["pays_naissance"] ?></td>
                 <td><?= $acteur["lieu_habitation"] ?></td>
                 <td><?= $acteur["informations_personnelles"] ?></td>
@@ -30,9 +30,20 @@ ob_start(); ?>
     </tbody>
 </table>
 
+<h2> Filmographie </h2>
+
+<ul>
+    <?php foreach($requeteFilms->fetchAll() as $filmographie) { ?>
+        <li>
+            <a href="index.php?action=detailActeur&id=<?=$filmographie['id_acteur']?>"> <?= $filmographie["titre_film"] ?> (<?= $filmographie["annee_sortie"] ?>) </a>
+        </li>
+        <?php } ?>
+</ul>
+
+
 <?php
 
-$titre = "Information concernant " . $acteur["acteur_actrice"] ;
+$titre = "Informations concernant " . $acteur["acteur_actrice"] ;
 $titre_secondaire = "Détail de " . $acteur["acteur_actrice"] ;
 $contenu = ob_get_clean();
 
