@@ -9,9 +9,8 @@ ob_start(); ?>
     <label for="nomRole">Nom du personnage :</label>
     <input type="text" name="nomRole" id="nomRole" placeholder="Marguerite de CARROUGES" required >
     <br>
-    <!-- <label for="">Description :</label>
-    <input type="text" name="descriptionRole" id="descriptionRole" placeholder="Une femme noble et ..." required >
-    <br> -->
+    <label for="desc">Description :</label>
+    <textarea name="" id="desc" cols="30" rows="10"></textarea>
     <input type="submit" name="submit" value="Ajouter" >
 
 </form>

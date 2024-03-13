@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `film` (
   `id_film` int NOT NULL AUTO_INCREMENT,
   `titre_film` varchar(50) NOT NULL,
   `date_sortie_france_film` date NOT NULL,
-  `duree_min_film` int NOT NULL,
+  `duree_mn_film` int NOT NULL,
   `affiche_film` varchar(50) NOT NULL,
   `synopsis_film` VARCHAR(300) NOT NULL,
   `note_film` int DEFAULT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `film` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- Listage des données de la table exercice_cinema.film : ~8 rows (environ)
-INSERT INTO `film` (`id_film`, `titre_film`, `date_sortie_france_film`, `duree_min_film`, `affiche_film`, `synopsis_film`, `note_film`, `id_realisateur`) VALUES
+INSERT INTO `film` (`id_film`, `titre_film`, `date_sortie_france_film`, `duree_mn_film`, `affiche_film`, `synopsis_film`, `note_film`, `id_realisateur`) VALUES
 	(1, 'Thelma et Louise', '1991-05-29', 129, 'indisponible.jpg', 'Deux amies partent en virée dans le désert pour échapper à leur quotidien, mais leur voyage prend une tournure inattendue.', 5, 1),
 	(2, 'Gladiator', '2000-06-20', 171, 'indisponible.jpg', 'Un général romain cherchant à venger la mort de sa famille se retrouve forcé de devenir un gladiateur dans l\'arène.', 5, 1),
 	(3, 'Blade Runner', '1982-09-15', 117, 'indisponible.jpg', 'Dans un futur dystopique, un détective doit traquer des robots répliquants dangereux dans une ville en décadence.', 5, 1),
@@ -202,7 +202,7 @@ INSERT INTO `role` (`id_role`, `nom_role`) VALUES
 	(4, 'Maximus DECIMUS MERIDIUS'),
 	(5, 'Commode'),
 	(6, 'Rick DECKARD'),
-	(7, 'Sean YOUNG'),
+	(7, 'Rachel'),
 	(8, 'Marguerite de CARROUGES'),
 	(9, 'Jacques le GRIS'),
 	(10, 'Mary CORLEONE'),

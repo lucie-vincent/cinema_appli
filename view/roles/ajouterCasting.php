@@ -16,7 +16,7 @@ $films = $requeteFilms->fetchAll();
         <?php
             foreach($roles as $role) { ?>
                 <option value="<?= $role["id_role"] ?>">
-                    <?= $role["titre_film"] ?>
+                    <?= $role["nom_role"] ?>
                 </option>
         <?php } ?>
     </select><br>
@@ -25,7 +25,7 @@ $films = $requeteFilms->fetchAll();
         <?php
             foreach($acteurs as $acteur) { ?>
                 <option value="<?= $acteur["id_acteur"] ?>">
-                    <?= $acteur["titre_film"] ?>
+                    <?= $acteur["acteur_actrice"] ?>
                 </option>
         <?php } ?>
     </select><br>
@@ -39,7 +39,7 @@ $films = $requeteFilms->fetchAll();
         <?php } ?>
     </select><br>
 
-
+    <input type="submit" name="submit" value="Ajouter" >
 </form>
 
 
