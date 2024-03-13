@@ -5,9 +5,13 @@ on va stocker tout ce qui est entre ces deux fonctions, tout le contenu dans une
 ob_start();
 
 $infosGenre = $requeteGenre->fetch();
+$listeFilms = $requeteFilms->fetchAll();
+
+if(count($listeFilms) == 0) {
+    echo "Pas de films associés à ce genre";
+} else {
 
 ?>
-
 
 <table>
     <thead>
@@ -28,13 +32,18 @@ $infosGenre = $requeteGenre->fetch();
 <h2> Liste des films </h2>
 
 <ul>
-    <?php foreach($requeteFilms->fetchAll() as $filmographie) { ?>
+    <?php foreach($listeFilms as $filmographie) { ?>
         <li>
             <a href="index.php?action=detailFilm&id=<?=$filmographie['id_film']?>"> <?= $filmographie["titre_film"] ?> (<?= $filmographie['anneeFilm']?>)</a>
         </li>
         <?php } ?>
 </ul>
 
+<?php
+
+}
+
+?>
 
 <?php
 

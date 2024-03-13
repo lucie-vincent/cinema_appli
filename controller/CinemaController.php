@@ -101,7 +101,7 @@ class CinemaController {
         $pdo = Connect::seConnecter();
         // afficher les détails du genre
         $requeteGenre = $pdo->prepare("
-            SELECT genre_film.nom_genre, genre_film.genre_description, genre_film.id_genre
+            SELECT genre_film.nom_genre, genre_film.description_genre, genre_film.id_genre
             FROM genre_film
             WHERE genre_film.id_genre = :id
         ");
