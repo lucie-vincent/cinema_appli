@@ -2,8 +2,13 @@
 on met en place la temporisation de sortie :
 on va stocker tout ce qui est entre ces deux fonctions, tout le contenu dans une variable $contenu-->
 <?php  
-ob_start(); ?>
+ob_start(); 
 
+$infosFilm = $requetefilm->fetch();
+$listeGenre = $requetefilmGenre->fetchAll();
+$listeCasting = $requeteCasting->fetchAll()
+
+?>
 
 <table>
     <thead>
@@ -17,16 +22,13 @@ ob_start(); ?>
         </tr>
     </thead>
     <tbody>
-        <?php
-        foreach($requetefilm->fetchAll() as $film) { ?>
-            <tr>
-                <td><?= $film["titre_film"] ?></td>
-                <td><?= $film["dateFilm"] ?></td>
-                <td><?= $film["duree_mn_film"] ?></td>
-                <td><?= $film["synopsis_film"] ?></td>
-                <td><?= $film["note_film"] ?></td>
-            </tr>
-    <?php } ?>
+        <tr>
+            <td><?= $infosFilm["titre_film"] ?></td>
+            <td><?= $infosFilm["dateFilm"] ?></td>
+            <td><?= $infosFilm["duree_mn_film"] ?></td>
+            <td><?= $infosFilm["synopsis_film"] ?></td>
+            <td><?= $infosFilm["note_film"] ?></td>
+        </tr>
     </tbody>
 </table>
 
@@ -38,7 +40,7 @@ ob_start(); ?>
         </thead>
         <tbody>
             <?php
-            foreach($requetefilmGenre->fetchAll() as $genre) { ?>
+            foreach($listeGenre as $genre) { ?>
                 <tr>
                     <td> <a href="index.php?action=detailGenre&id=<?=$genre['id_genre'] ?> "> <?= $genre["nom_genre"] ?> </a></td>
                 </tr>
@@ -55,7 +57,7 @@ ob_start(); ?>
         </thead>
         <tbody>
             <?php
-            foreach($requeteCasting->fetchAll() as $casting) { ?>
+            foreach($listeCasting as $casting) { ?>
                 <tr>
                     <td> <a href="index.php?action=detailRole&id=<?=$casting['id_role']?>" > <?= $casting["nom_role"] ?> </a></td>
                     <td> <a href="index.php?action=detailActeur&id=<?=$casting['id_acteur']?>" > <?= $casting["acteur_actrice"]?> </a></td>
@@ -67,8 +69,8 @@ ob_start(); ?>
 
 <?php
 
-$titre = "Détail de " . $film["titre_film"] ;
-$titre_secondaire = "Détail de " . $film["titre_film"];
+$titre = "Détail de " . $infosFilm["titre_film"] ;
+$titre_secondaire = "Détail de " . $infosFilm["titre_film"];
 $contenu = ob_get_clean();
 
 require "view/template.php";

@@ -2,7 +2,10 @@
 on met en place la temporisation de sortie :
 on va stocker tout ce qui est entre ces deux fonctions, tout le contenu dans une variable $contenu-->
 <?php  
-ob_start(); ?>
+ob_start(); 
+
+$infosRealisateur = $requeteRealisateur->fetch();
+?>
 
 <table>
     <thead>
@@ -16,17 +19,14 @@ ob_start(); ?>
         </tr>
     </thead>
     <tbody>
-        <?php
-        foreach($requeteRealisateur->fetchAll() as $realisateur) { ?>
-            <tr>
-                <td><?= $realisateur["realisateur_realisatrice"] ?></td>
-                <td><?= $realisateur["sexe_personne"] ?></td>
-                <td><?= $realisateur["date_naissance"] ?></td>
-                <td><?= $realisateur["pays_naissance"] ?></td>
-                <td><?= $realisateur["lieu_habitation"] ?></td>
-                <td><?= $realisateur["informations_personnelles"] ?></td>
-            </tr>
-    <?php } ?>
+        <tr>
+            <td><?= $infosRealisateur["realisateur_realisatrice"] ?></td>
+            <td><?= $infosRealisateur["sexe_personne"] ?></td>
+            <td><?= $infosRealisateur["date_naissance"] ?></td>
+            <td><?= $infosRealisateur["pays_naissance"] ?></td>
+            <td><?= $infosRealisateur["lieu_habitation"] ?></td>
+            <td><?= $infosRealisateur["informations_personnelles"] ?></td>
+        </tr>
     </tbody>
 </table>
 
@@ -42,8 +42,8 @@ ob_start(); ?>
 
 <?php
 
-$titre = "Information concernant " . $realisateur["realisateur_realisatrice"] ;
-$titre_secondaire = "Détail de " . $realisateur["realisateur_realisatrice"] ;
+$titre = "Information concernant " . $infosRealisateur["realisateur_realisatrice"] ;
+$titre_secondaire = "Détail de " . $infosRealisateur["realisateur_realisatrice"] ;
 $contenu = ob_get_clean();
 
 require "view/template.php";

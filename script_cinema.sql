@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `film` (
   `date_sortie_france_film` date NOT NULL,
   `duree_mn_film` int NOT NULL,
   `affiche_film` varchar(50) NOT NULL,
-  `synopsis_film` VARCHAR(300) NOT NULL,
+  `synopsis_film` TEXT NOT NULL,
   `note_film` int DEFAULT NULL,
   `id_realisateur` int NOT NULL,
   PRIMARY KEY (`id_film`),
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `personne` (
   `date_naissance_personne` date NOT NULL,
   `pays_naissance` varchar(100) DEFAULT NULL,
   `lieu_habitation` varchar(100) DEFAULT NULL,
-  `informations_personnelles` varchar(50) NOT NULL,
+  `informations_personnelles` TEXT NOT NULL,
   PRIMARY KEY (`id_personne`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
@@ -212,7 +212,7 @@ INSERT INTO `role` (`id_role`, `nom_role`) VALUES
 	
 -- Ajouter une nouvelle colonne genre_description
 ALTER TABLE genre_film
-ADD COLUMN genre_description VARCHAR(300);
+ADD COLUMN genre_description TEXT;
 
 -- Mettre à jour la colonne genre_description avec les descriptions des genres
 UPDATE genre_film
@@ -232,7 +232,7 @@ SET genre_description =
 
 -- Ajouter une nouvelle colonne 'description'
 ALTER TABLE role
-ADD COLUMN description_role VARCHAR(300);
+ADD COLUMN description_role TEXT;
 
 -- Mettre à jour la colonne 'description' avec les descriptions des personnages
 UPDATE role

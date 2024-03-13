@@ -2,7 +2,11 @@
 on met en place la temporisation de sortie :
 on va stocker tout ce qui est entre ces deux fonctions, tout le contenu dans une variable $contenu-->
 <?php  
-ob_start(); ?>
+ob_start();
+
+$infosGenre = $requeteGenre->fetch();
+
+?>
 
 
 <table>
@@ -14,14 +18,11 @@ ob_start(); ?>
         <tr>
     </thead>
     <tbody>
-        <?php
-        foreach($requeteGenre->fetchAll() as $genre) { ?>
-            <tr>
-                <td><?= $genre["nom_genre"] ?></td>
-                <td><?= $genre["genre_description"] ?></td>
-            </tr>
-    <?php } ?>
-    </tbody>
+        <tr>
+            <td><?= $infosGenre["nom_genre"] ?></td>
+            <td><?= $infosGenre["genre_description"] ?></td>
+        </tr>    
+</tbody>
 </table>
 
 <h2> Liste des films </h2>
@@ -37,8 +38,8 @@ ob_start(); ?>
 
 <?php
 
-$titre = "Détail de " . $genre["nom_genre"] ;
-$titre_secondaire = "Détail de " . $genre["nom_genre"];
+$titre = "Détail de " . $infosGenre["nom_genre"] ;
+$titre_secondaire = "Détail de " . $infosGenre["nom_genre"];
 $contenu = ob_get_clean();
 
 require "view/template.php";

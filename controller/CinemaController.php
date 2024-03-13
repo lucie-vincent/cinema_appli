@@ -80,7 +80,19 @@ class CinemaController {
         require "view/films/detailFilm.php";
     }
 
-           // ------------------------------------------------------------------
+
+    // ajouter un film
+
+
+
+
+
+
+
+
+
+
+            // ------------------------------------------------------------------
             // ------------------------------ GENRES -----------------------------
             // ------------------------------------------------------------------
 
@@ -240,8 +252,18 @@ class CinemaController {
     // détail d'un rôle
     public function detailRole($id) {
         $pdo = Connect::seConnecter();
-        $requete = $pdo->prepare("
-            SELECT  role.nom_role, role.description_role, role.id_role, film.titre_film,
+
+        $requeteRole = $pdo->prepare("
+            SELECT * FROM role
+            WHERE id_role = :id
+        ");
+
+        $requeteRole->execute([
+            "id" => $id
+        ]);
+
+        $requeteCasting = $pdo->prepare("
+            SELECT  role.description_role, role.id_role, film.titre_film,
                     YEAR(date_sortie_france_film) AS annee_sortie,
                     film.id_film, acteur.id_acteur,
                     CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice
@@ -254,7 +276,7 @@ class CinemaController {
 
 
         ");
-        $requete->execute([":id"=>$id]);
+        $requeteCasting->execute([":id"=>$id]);
 
         require "view/roles/detailRole.php";
     }
@@ -269,35 +291,26 @@ class CinemaController {
             
             // on filtre le champ rôle du formulaire (filter_input)
             $nomRole = filter_input(INPUT_POST, "nomRole", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            // $descriptionRole = filter_input(INPUT_POST, "descriptionRole", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $descriptionRole = filter_input(INPUT_POST, "descriptionRole", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             
             // si le filtre est valide
-            if($nomRole) {
-                // on prépare la requête d'insertion (INSERT INTO...VALUES)
+            if($nomRole && $descriptionRole) {
+                // on prépare la requête d'insertion (INSERT INTO...VALUES) du nom + description
                 $requeteNomRole = $pdo->prepare("
-                    INSERT INTO role (nom_role)
-                    VALUES (:nomRole);
+                    INSERT INTO role (nom_role, description_role)
+                    VALUES (:nomRole, :descriptionRole);
                 ");
                 
                 // on exécute la requête en faisant passer le tableau d'arguments
-                $requeteNomRole->execute([":nomRole"=>$nomRole]);
-                
-                // on fait la redirection vers la liste des roles (header("Location: index.php..."))
+                $requeteNomRole->execute([
+                    ":nomRole"=>$nomRole,
+                    ":descriptionRole"=>$descriptionRole
+                ]);
+            
                 header('Location: index.php?action=listRoles');
                 die();
             }
 
-            // if($descriptionRole) {
-            //     $requeteDescriptionRole = $pdo->prepare("
-            //     INSERT INTO role (description_role)
-            //     VALUES (:descriptionRole);
-            //     ");
-
-            //     $requeteDescriptionRole->execute(["descriptionRole"=>$descriptionRole]);
-            
-            //     header('Location: index.php?action=listRoles');
-            //     die();
-            // }
         }
         // on relie la vue qui nous intéresse dans le dossier view
         require "view/roles/ajouterRole.php";
