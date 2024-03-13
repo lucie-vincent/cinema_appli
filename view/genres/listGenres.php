@@ -11,6 +11,9 @@
         <?php } ?>
 </ul>
 
+
+<a href="index.php?action=ajouterGenre">Ajouter un genre</a>
+
 <?php
 
 $titre = "Liste des genres";

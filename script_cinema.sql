@@ -210,13 +210,13 @@ INSERT INTO `role` (`id_role`, `nom_role`) VALUES
 	(12, '"Sport" MATTHEW');
 	
 	
--- Ajouter une nouvelle colonne genre_description
+-- Ajouter une nouvelle colonne description_genre
 ALTER TABLE genre_film
-ADD COLUMN genre_description TEXT;
+ADD COLUMN description_genre TEXT;
 
--- Mettre à jour la colonne genre_description avec les descriptions des genres
+-- Mettre à jour la colonne description_genre avec les descriptions des genres
 UPDATE genre_film
-SET genre_description = 
+SET description_genre = 
     CASE 
         WHEN nom_genre = 'Road movie' THEN 'Un genre de film où le voyage est au cœur de l\'intrigue, mettant en avant les personnages principaux traversant des paysages variés, souvent sur la route, souvent accompagné de découvertes personnelles et d\'expériences marquantes.'
         WHEN nom_genre = 'Peplum dramatique' THEN 'Un genre de film dramatique historique se déroulant dans l\'Antiquité, caractérisé par des histoires épiques, des décors somptueux, des costumes élaborés et des intrigues politiques ou sociales.'

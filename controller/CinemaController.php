@@ -80,18 +80,6 @@ class CinemaController {
         require "view/films/detailFilm.php";
     }
 
-
-    // ajouter un film
-
-
-
-
-
-
-
-
-
-
             // ------------------------------------------------------------------
             // ------------------------------ GENRES -----------------------------
             // ------------------------------------------------------------------
@@ -132,6 +120,37 @@ class CinemaController {
         $requeteFilms->execute([":id"=>$id]);
 
         require "view/genres/detailGenre.php";
+
+    }
+
+    // ajouter un genre
+    public function ajouterGenre()  {
+        // si on détecte le submit if(isset($_POST["submit"]))
+        if(isset($_POST["submit"])) {
+            // alors on se connecte à la base de données
+            $pdo = Connect::seConnecter();
+
+            // on assainit les données transmises
+            $nomGenre = filter_input(INPUT_POST, "nomGenre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $descriptionGenre = filter_input(INPUT_POST, "descriptionGenre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            // si le filtre est valide, on fait les requêtes
+            if($nomGenre && $descriptionGenre) {
+                // on prépare la requête
+                $requeteAjoutGenre =$pdo->prepare("
+                INSERT INTO genre_film (nom_genre, description_genre)
+                VALUES (:nomGenre, :descriptionGenre)
+                ");
+                $requeteAjoutGenre->execute([
+                    ":nomGenre" => $nomGenre,
+                    ":descriptionGenre" => $descriptionGenre
+                ]);
+            }
+
+
+        }
+
+        require "view/genres/ajouterGenre.php";
 
     }
 
@@ -289,7 +308,7 @@ class CinemaController {
             // alors on se connecte à la base de données
             $pdo = Connect::seConnecter();
             
-            // on filtre le champ rôle du formulaire (filter_input)
+            // on filtre le champ rôle du formulaire (filter_input) = on assainit
             $nomRole = filter_input(INPUT_POST, "nomRole", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $descriptionRole = filter_input(INPUT_POST, "descriptionRole", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             
