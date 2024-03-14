@@ -24,7 +24,7 @@ if(count($listeFilms) == 0) {
     <tbody>
         <tr>
             <td><?= $infosGenre["nom_genre"] ?></td>
-            <td><?= $infosGenre["genre_description"] ?></td>
+            <td><?= $infosGenre["description_genre"] ?></td>
         </tr>    
 </tbody>
 </table>

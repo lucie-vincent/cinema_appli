@@ -20,14 +20,6 @@ ob_start();
 
 
 
-
-
-
-
-
-
-
-
 <?php
 $titre = "Ajouter un genre";
 $titre_secondaire = "";

@@ -66,6 +66,8 @@ $listeCasting = $requeteCasting->fetchAll()
         </tbody>
 </table>
 
+<br>
+<!-- <a href="index.php?action=associerGenre">Associer un genre</a> -->
 
 <?php
 

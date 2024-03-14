@@ -23,6 +23,9 @@ ob_start(); ?>
         </tbody>
 </table>
     
+<br>
+<a href="index.php?action=ajouterActeur">Ajouter un acteur</a>
+
     
 <?php
 

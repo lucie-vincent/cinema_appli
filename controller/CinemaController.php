@@ -146,13 +146,54 @@ class CinemaController {
                     ":descriptionGenre" => $descriptionGenre
                 ]);
             }
-
-
         }
 
         require "view/genres/ajouterGenre.php";
-
     }
+
+    // associer un genre à un film
+    // public function associerGenre() {
+    //     // on se connecte à la bdd
+    //     $pdo = Connect::seConnecter();
+    //     // on fait les requêtes pour sortir les listes de genres + films
+    //     $requeteGenres = $pdo->query("
+    //         SELECT genre_film.nom_genre, genre_film.id_genre
+    //         FROM genre_film
+    //         ORDER BY genre_film.nom_genre ASC
+    //     ");
+
+    //     $requeteFilms = $pdo->query("
+    //         SELECT film.titre_film, film.id_film
+    //         FROM film
+    //         ORDER BY film.titre_film ASC
+    //     ");
+       
+    //     // on détecte le submit
+    //     if(isset($_POST["submit"])) {
+    //         // on assainit les données transmises
+    //         $genres = filter_input(INPUT_POST, "genres", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    //         $films = filter_input(INPUT_POST, "films", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+        
+    //         // on vérifie si le filtre/ l'assainissement est valide
+    //         if( $genres && $films){
+    //             // on prépare la requête
+    //             $requeteAssocier = $pdo->prepare("
+    //                 INSERT INTO definir(id_genre, id_film)
+    //                 VALUES (:genres, :films)
+    //             ");
+    //             // on exécute la requête
+    //             $requeteAssocier->execute([
+    //                 ":genres" => $genres,
+    //                 ":films" => $films
+    //             ]);
+    //         }
+            
+    //         header('Location:index.php?action=detailFilm');
+    //         die();
+    //     }
+
+    //     require "view/genres/associerGenre.php";
+    // }
 
             // ------------------------------------------------------------------
             // ------------------------------ ACTEURS -----------------------------
@@ -200,6 +241,56 @@ class CinemaController {
         $requeteFilms->execute([":id"=>$id]);
 
         require "view/acteurs/detailActeur.php";
+    }
+
+    // ajouter acteur 
+    public function ajouterActeur() {
+        if(isset($_POST["submit"])) {
+            $pdo = Connect::seConnecter();
+
+            $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $genre = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $dateNaissance = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $pays = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $habitation = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $infos = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            if($prenom && $nom && $genre && $dateNaissance && $pays && $habitation && $infos) {
+                $requeteAjoutPersonne = $pdo->prepare("
+                    INSERT INTO personne (prenom_personne, nom_personne, sexe_personne, 
+                                        date_naissance_personne, pays_naissance, lieu_habitation, 
+                                        informations_personnelles)
+                    VALUES (:prenom, :nom, :genre, :dateNaissance, :pays, :habitation, :infos)
+
+                ");
+
+                $requeteAjoutPersonne->execute([
+                    ":prenom" => $prenom,
+                    ":nom" => $nom,
+                    ":genre" => $genre,
+                    ":dateNaissance" => $dateNaissance,
+                    ":pays" => $pays,
+                    ":habitation" => $habitation,
+                    ":infos" => $infos
+                ]);
+
+                // on récupère le dernier ID (voir la méthode lastInsertId)
+                $id_personne = $pdo->lastInsertId();
+                // on prépare la requête et on l'exécute
+                $requeteAjoutPersonne = $pdo->prepare("
+                    INSERT INTO acteur (id_personne)
+                    VALUES (:idPersonne)
+                ");
+                $requeteAjoutPersonne->execute([
+                    "idPersonne" => $id_personne
+                ]);
+
+                header('Location: index.php?action=listActeurs');
+                die();
+            }
+        }
+        require "view/acteurs/ajouterActeur.php";
     }
 
            // ------------------------------------------------------------------
