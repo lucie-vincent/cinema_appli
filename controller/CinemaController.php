@@ -245,56 +245,50 @@ class CinemaController {
 
     // ajouter acteur 
     public function ajouterActeur() {
-        if(isset($_POST["submit"])) {
+        if(isset($_POST["submit"])){
             $pdo = Connect::seConnecter();
 
-            $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $genre = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $dateNaissance = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $pays = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $habitation = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $infos = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            var_dump($_POST);
+        
+            $prenom         = filter_input(INPUT_POST,"prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $nom            = filter_input(INPUT_POST,"nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);;
+            $genre          = filter_input(INPUT_POST,"genre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $dateNaissance  = filter_input(INPUT_POST,"dateNaissance", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $pays           = filter_input(INPUT_POST,"pays", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $habitation     = filter_input(INPUT_POST,"habitation", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $infos          = filter_input(INPUT_POST,"infos", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-            if($prenom && $nom && $genre && $dateNaissance && $pays && $habitation && $infos) {
-                $requeteAjoutPersonne = $pdo->prepare("
-                    INSERT INTO personne (prenom_personne, nom_personne, sexe_personne, 
-                                        date_naissance_personne, pays_naissance, lieu_habitation, 
-                                        informations_personnelles)
-                    VALUES (:prenom, :nom, :genre, :dateNaissance, :pays, :habitation, :infos)
+            if($prenom && $nom && $genre && $dateNaissance 
+                && $pays && $habitation && $infos) {
 
-                ");
+                    var_dump($prenom, $nom, $genre, $dateNaissance, $pays, $habitation, $infos);
 
-                $requeteAjoutPersonne->execute([
-                    ":prenom" => $prenom,
-                    ":nom" => $nom,
-                    ":genre" => $genre,
-                    ":dateNaissance" => $dateNaissance,
-                    ":pays" => $pays,
-                    ":habitation" => $habitation,
-                    ":infos" => $infos
-                ]);
+                    $requeteAjoutActeur = $pdo->prepare("
+                        INSERT INTO personne (prenom_personne, nom_personne, sexe_personne, date_naissance_personne, pays_naissance, lieu_habitation, informations_personnelles)
+                        VALUES (:prenom, :nom, :genre, :dateNaissance,
+                                :pays, :habitation, :infos)
+                    ");
+                    $requeteAjoutActeur->execute([ 
+                        ":prenom" => $prenom,
+                        ":nom" => $nom,
+                        ":genre" => $genre,
+                        ":dateNaissance" => $dateNaissance,
+                        ":pays" => $pays,
+                        ":habitation" => $habitation,
+                        ":infos" => $infos,
+                    ]);
 
-                // on récupère le dernier ID (voir la méthode lastInsertId)
-                $id_personne = $pdo->lastInsertId();
-                // on prépare la requête et on l'exécute
-                $requeteAjoutPersonne = $pdo->prepare("
-                    INSERT INTO acteur (id_personne)
-                    VALUES (:idPersonne)
-                ");
-                $requeteAjoutPersonne->execute([
-                    "idPersonne" => $id_personne
-                ]);
-
-                header('Location: index.php?action=listActeurs');
-                die();
-            }
+                    header('Location:index.php?action=listActeurs');
+                    die();
+                }
         }
         require "view/acteurs/ajouterActeur.php";
     }
 
-           // ------------------------------------------------------------------
-            // ------------------------------ REALISATEURS -----------------------------
+
+
+            // ------------------------------------------------------------------
+            // ------------------------------ REALISATEURS ----------------------
             // ------------------------------------------------------------------
 
 

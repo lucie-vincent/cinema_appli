@@ -3,7 +3,7 @@
 ob_start();
 ?>
 
-<form action="index.php?action=AjouterActeur" method="POST" >
+<form action="index.php?action=ajouterActeur" method="POST" >
     <label for="prenom">Prénom :</label><br>
     <input type="text" name="prenom" id="prenom" required ><br>
 
@@ -22,13 +22,13 @@ ob_start();
     <label for="pays">Pays de naissance :</label><br>
     <input type="text" name="pays" id="pays" ><br>
 
-    <label for="adresse">Lieu d'habitation :</label><br>
-    <input type="text" name="adresse" id="adresse" ><br>
+    <label for="habitation">Lieu d'habitation :</label><br>
+    <input type="text" name="habitation" id="habitation" ><br>
 
     <label for="infos">Informations personnelles :</label><br>
     <textarea name="infos" id="infos" cols="30" rows="10"></textarea><br>
 
-    <input type="submit" value="Ajouter" >
+    <input type="submit" name="submit" value="Ajouter" >
 
 </form>
 
