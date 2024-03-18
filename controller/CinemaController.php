@@ -251,31 +251,45 @@ class CinemaController {
             var_dump($_POST);
         
             $prenom         = filter_input(INPUT_POST,"prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-            $nom            = filter_input(INPUT_POST,"nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);;
+            $nom            = filter_input(INPUT_POST,"nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $genre          = filter_input(INPUT_POST,"genre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $dateNaissance  = filter_input(INPUT_POST,"dateNaissance", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $pays           = filter_input(INPUT_POST,"pays", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $habitation     = filter_input(INPUT_POST,"habitation", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $infos          = filter_input(INPUT_POST,"infos", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            var_dump($prenom, $nom, $genre, $dateNaissance, 
+                    $pays, $habitation, $infos);
 
             if($prenom && $nom && $genre && $dateNaissance 
                 && $pays && $habitation && $infos) {
 
-                    var_dump($prenom, $nom, $genre, $dateNaissance, $pays, $habitation, $infos);
 
-                    $requeteAjoutActeur = $pdo->prepare("
-                        INSERT INTO personne (prenom_personne, nom_personne, sexe_personne, date_naissance_personne, pays_naissance, lieu_habitation, informations_personnelles)
+                    $requeteAjoutPersonne = $pdo->prepare("
+                        INSERT INTO personne (prenom_personne, nom_personne, 
+                                    sexe_personne, date_naissance_personne, 
+                                    pays_naissance, lieu_habitation, 
+                                    informations_personnelles)
                         VALUES (:prenom, :nom, :genre, :dateNaissance,
                                 :pays, :habitation, :infos)
                     ");
-                    $requeteAjoutActeur->execute([ 
+                    $requeteAjoutPersonne->execute([ 
                         ":prenom" => $prenom,
                         ":nom" => $nom,
                         ":genre" => $genre,
                         ":dateNaissance" => $dateNaissance,
                         ":pays" => $pays,
                         ":habitation" => $habitation,
-                        ":infos" => $infos,
+                        ":infos" => $infos
+                    ]);
+
+                    $id_personne = $pdo->lastInsertId();
+                    $requeteAjoutActeur = $pdo->prepare(
+                        "INSERT INTO acteur (id_personne)
+                        VALUES (:id_personne)"
+                    );
+                    $requeteAjoutActeur->execute([
+                        ":id_personne" => $id_personne
                     ]);
 
                     header('Location:index.php?action=listActeurs');
@@ -336,6 +350,12 @@ class CinemaController {
         $requeteFilmographie->execute([":id"=>$id]);
 
         require "view/realisateurs/detailRealisateur.php";
+    }
+
+
+    // ajouter un réalisateur
+    public function ajouterRealisateur(){
+        require "view/realisateurs/ajouterRealisateur.php";
     }
 
             // ------------------------------------------------------------------
