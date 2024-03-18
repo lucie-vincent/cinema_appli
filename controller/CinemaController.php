@@ -247,8 +247,6 @@ class CinemaController {
     public function ajouterActeur() {
         if(isset($_POST["submit"])){
             $pdo = Connect::seConnecter();
-
-            var_dump($_POST);
         
             $prenom         = filter_input(INPUT_POST,"prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $nom            = filter_input(INPUT_POST,"nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -258,8 +256,6 @@ class CinemaController {
             $habitation     = filter_input(INPUT_POST,"habitation", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $infos          = filter_input(INPUT_POST,"infos", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             
-            var_dump($prenom, $nom, $genre, $dateNaissance, 
-                    $pays, $habitation, $infos);
 
             if($prenom && $nom && $genre && $dateNaissance 
                 && $pays && $habitation && $infos) {
@@ -355,6 +351,54 @@ class CinemaController {
 
     // ajouter un réalisateur
     public function ajouterRealisateur(){
+        if(isset($_POST["submit"])) {
+            $pdo = Connect::seConnecter();
+
+            $prenom         = filter_input(INPUT_POST,"prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $nom            = filter_input(INPUT_POST,"nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $genre          = filter_input(INPUT_POST,"genre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $dateNaissance  = filter_input(INPUT_POST,"dateNaissance", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $pays           = filter_input(INPUT_POST,"pays", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $habitation     = filter_input(INPUT_POST,"habitation", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $infos          = filter_input(INPUT_POST,"infos", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            if($prenom && $nom && $genre && $dateNaissance 
+                && $pays && $habitation && $infos) {
+                    $requeteAjoutPersonne = $pdo->prepare("
+                        INSERT INTO personne (prenom_personne, nom_personne, 
+                                        sexe_personne, date_naissance_personne, 
+                                        pays_naissance, lieu_habitation, 
+                                        informations_personnelles)
+                            VALUES (:prenom, :nom, :genre, :dateNaissance,
+                                    :pays, :habitation, :infos)
+                    ");
+                    $requeteAjoutPersonne->execute([
+                        ":prenom" => $prenom,
+                        ":nom"  => $nom,
+                        ":genre" => $genre,
+                        ":dateNaissance" => $dateNaissance,
+                        ":pays" => $pays,
+                        ":habitation" => $habitation,
+                        ":infos" => $infos
+                    ]);
+
+                    $id_personne = $pdo->lastInsertId();
+
+                    $requeteAjoutRealisateur = $pdo->prepare("
+                        INSERT INTO realisateur (id_personne)
+                            VALUES (:id_personne)
+                    ");
+
+                    $requeteAjoutRealisateur->execute([
+                        ":id_personne" => $id_personne
+                    ]);
+
+                    header('Location:index.php?action=listRealisateurs');
+                    die();
+
+                }
+
+        }
         require "view/realisateurs/ajouterRealisateur.php";
     }
 

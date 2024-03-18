@@ -1,23 +1,25 @@
 <?php
 // index va servir à accueillir l'action transmise par l'URL (en GET -> voir Appli_PHP)
 
-// on use le controller Cinema
+// on use les controller 
 use Controller\CinemaController;
+use Controller\FilmController;
 
 // on autocharge les classes du projet
 spl_autoload_register(function($class_name) {
     include $class_name . '.php';
 });
-// on instancie le controller Cinema
+// on instancie les controller 
 $ctrlCinema = new CinemaController();
+$ctrlFilm = new FilmController();
 
 $id = (isset($_GET["id"])) ? $_GET["id"] : null; 
 
 if(isset($_GET["action"])) {
     switch ($_GET["action"]) {
         // Films
-        case "listFilms"            : $ctrlCinema->listFilms();             break;
-        case "detailFilm"           : $ctrlCinema->detailFilm($id);         break;
+        case "listFilms"            : $ctrlFilm->listFilms();             break;
+        case "detailFilm"           : $ctrlFilm->detailFilm($id);         break;
         // Genres
         case "listGenres"           : $ctrlCinema->listGenres();            break;
         case "detailGenre"          : $ctrlCinema->detailGenre($id);        break;

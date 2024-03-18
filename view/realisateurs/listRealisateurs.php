@@ -23,7 +23,7 @@
 </table>
 
 <br>
-<a href="/view/realisateurs/ajouterRealisateur.php">Ajouter un réalisateur</a>
+<a href="index.php?action=ajouterRealisateur">Ajouter un réalisateur</a>
 
 
 <?php
