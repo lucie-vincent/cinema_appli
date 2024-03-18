@@ -12,6 +12,7 @@ $films = $requeteFilms->fetchAll();
 ?>
 
 <form action="index.php?action=ajouterCasting" method="POST" >
+    <label for="roles">Role :</label>
     <select name="roles" id="roles" required>
         <?php
             foreach($roles as $role) { ?>
@@ -21,6 +22,7 @@ $films = $requeteFilms->fetchAll();
         <?php } ?>
     </select><br>
 
+    <label for="acteurs">Acteur :</label>
     <select name="acteurs" id="acteurs" required>
         <?php
             foreach($acteurs as $acteur) { ?>
@@ -30,6 +32,7 @@ $films = $requeteFilms->fetchAll();
         <?php } ?>
     </select><br>
 
+    <label for="films">Film :</label>
     <select name="films" id="films" required>
         <?php
             foreach($films as $film) { ?>

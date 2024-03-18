@@ -27,6 +27,8 @@ ob_start(); ?>
     </tbody>
 </table>
 
+<br>
+<a href="index.php?action=ajouterFilm">Ajouter un film </a>
 
 <?php
 $titre = "Liste de films";

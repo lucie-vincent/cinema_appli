@@ -57,7 +57,7 @@ class CastingController{
             die();
         }
 
-        require "view/roles/ajouterCasting.php";
+        require "view/casting/ajouterCasting.php";
 
     }
   

@@ -76,4 +76,30 @@ class FilmController{
         // on relie la vue qui nous intéresse dans le dossier view
         require "view/films/detailFilm.php";
     }
+
+    // --------------------------------------------------
+
+    // ajouter un film
+    public function ajouterFilm(){
+        // on se connecte à la BDD
+        $pdo = Connect::seConnecter();
+        // on effectue la requête pour lister les réalisateurs
+        $requeteRealisateurs = $pdo->query("
+            SELECT realisateur.id_realisateur, 
+                    CONCAT(personne.prenom_personne, ' ', personne.nom_personne) 
+                        AS realisateur_realisatrice
+            FROM realisateur
+                INNER JOIN personne ON realisateur.id_personne = personne.id_personne 
+            ORDER BY realisateur_realisatrice ASC 
+        ");
+        // on effectue la requête pour lister les genres
+        $requeteGenres = $pdo->query("
+            SELECT genre_film.id_genre, genre_film.nom_genre
+            FROM genre_film
+            ORDER BY genre_film.nom_genre ASC 
+        ");
+        require "view/films/ajouterFilm.php";
+    }
+
+
 }
