@@ -24,6 +24,8 @@ class FilmController{
         require "view/films/listFilms.php";
     }
 
+    // --------------------------------------------------
+
     // détail d'un film
     public function detailFilm($id) {
         // on fait appel à la fonction seConnecter dans le nameSpace Connect (=Connect.php)
