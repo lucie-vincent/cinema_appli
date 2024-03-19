@@ -48,6 +48,7 @@ if(isset($_GET["action"])) {
         case "listRoles"            : $ctrlRole->listRoles();                   break;
         case "detailRole"           : $ctrlRole->detailRole($id);               break;
         case "ajouterRole"          : $ctrlRole->ajouterRole();                 break;
+        case "modifierRole"         : $ctrlRole->modifierRole($id);             break;
         // Casting
         case "ajouterCasting"       : $ctrlCasting->ajouterCasting();        break;
     }

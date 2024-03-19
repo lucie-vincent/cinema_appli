@@ -42,6 +42,9 @@ $casting = $requeteCasting->fetchAll();
     }
 ?>
 
+<br>
+<a href="index.php?action=modifierRole">Modifier le rôle</a>
+
 <?php
 
 $titre = "Détail de " . $roleInfos["nom_role"] ;
