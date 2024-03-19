@@ -32,15 +32,18 @@ $genres = $requeteGenres->fetchAll();
     </select><br>
 
     <legend>Genre(s) :</legend>
-        <?php
-            foreach($genres as $genre) { ?>
-                <input type="checkbox" name="genres[]" 
-                        id="<?= $genre["nom_genre"] ?>"
-                        value="<?= $genre["id_genre"] ?> ">
-                <label for="<?= $genre["nom_genre"] ?>">
-                        <?= $genre["nom_genre"] ?>
-                </label><br>
-        <?php    } ?>
+    <?php
+        foreach($genres as $genre) { ?>
+            <input type="checkbox" name="genres[]" 
+                    id="<?= $genre["nom_genre"] ?>"
+                    value="<?= $genre["id_genre"] ?> ">
+            <label for="<?= $genre["nom_genre"] ?>">
+                    <?= $genre["nom_genre"] ?>
+            </label><br>
+    <?php    } ?>
+
+    <br>
+    <input type="submit" name="submit" value="Ajouter" >
 </form>
 
 <?php

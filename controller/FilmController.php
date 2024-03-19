@@ -98,6 +98,64 @@ class FilmController{
             FROM genre_film
             ORDER BY genre_film.nom_genre ASC 
         ");
+
+        // on vérifie la soumission
+        if(isset($_POST["submit"])){
+            // on traite les données soumises
+            $titre = filter_input(INPUT_POST,"titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $dateSortie = filter_input(INPUT_POST, "dateSortie", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $duree = filter_input(INPUT_POST, "duree", FILTER_VALIDATE_INT);
+            $synopsis = filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $note = filter_input(INPUT_POST, "note", FILTER_VALIDATE_INT);
+            $realisateur = filter_input(INPUT_POST, "realisateur", FILTER_VALIDATE_INT);
+            // les genres sont transmis sous forme de tableau, d'où les filtres
+            $genres = filter_input(INPUT_POST, "genres", FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+
+            // on vérifie la réussite des filtres
+            if($titre && $dateSortie && $duree && $synopsis && 
+                $note && $realisateur && $genres){
+                    // on prépare la requête pour l'ajout dans la table film
+                    $requeteFilm = $pdo->prepare("
+                        INSERT INTO film (titre_film, date_sortie_france_film, 
+                                        duree_mn_film, synopsis_film, note_film, 
+                                        id_realisateur, affiche_film)
+                        VALUES ( :titre, :dateSortie, :duree, :synopsis, :note,
+                                :realisateur, '')
+                    ");
+
+                    $requeteFilm->execute([
+                        ":titre" => $titre,
+                        ":dateSortie" => $dateSortie,
+                        ":duree" => $duree,
+                        ":synopsis" => $synopsis,
+                        ":note" => $note,
+                        ":realisateur" => $realisateur,
+                    ]);
+
+                    // on prépare la requête pour l'ajout dans la table film
+                    // on utilise lastInsertId car on veut récupérer l'id du film ajouté
+                    // précédemment
+                    $id_film = $pdo->lastInsertId();
+
+                    foreach($genres as $genre) {
+                        $requeteGenres = $pdo->prepare("
+                            INSERT INTO definir (id_film, id_genre)
+                            VALUES (:id_film, :id_genre)
+                        ");
+
+                        $requeteGenres->execute([
+                            ":id_film" => $id_film,
+                            ":id_genre" => $genre
+                        ]);
+
+                    }
+
+                }
+                
+                header('Location:index.php?action=listFilms');
+                die();
+        }
+
         require "view/films/ajouterFilm.php";
     }
 
