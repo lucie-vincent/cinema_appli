@@ -3,9 +3,9 @@ ob_start();
 $role = $requeteInfosRole->fetch();
 ?>
 
-<form action="index.php?action=modifierRole" method="POST" >
+<form action="index.php?action=modifierRole&id=<?= $role["id_role"] ?>" method="POST" >
     <label for="nomRole">Nom du personnage :</label>
-    <input type="text" name="nomRole" id="nomRole" value="<?= $role["nom_role"] ?>" required >
+    <input type="text" name="nomRole" id="nomRole" value="<?= $role["nom_role"] ?>" >
     <br>
 
     <label for="descriptionRole">Description :</label>

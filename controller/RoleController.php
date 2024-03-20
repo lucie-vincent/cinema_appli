@@ -91,25 +91,24 @@ class RoleController{
     public function modifierRole($id) {
         $pdo = Connect::seConnecter();
         $requeteInfosRole = $pdo->prepare("
-            SELECT nom_role, description_role
+            SELECT nom_role, description_role, id_role
             FROM role 
             WHERE id_role = :id
         ");
         $requeteInfosRole->execute([
             ":id" => $id
         ]);
+        
 
         if(isset($_POST["submit"])) {
             $nomRole = filter_input(INPUT_POST, "nomRole", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $descriptionRole = filter_input(INPUT_POST, "descriptionRole", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-        
-            var_dump($_POST);
-
+            
             if($nomRole && $descriptionRole) {
                 $requeteModifRole = $pdo->prepare("
                     UPDATE role
-                    SET :nomRole,
-                        :descriptionRole
+                    SET nom_role = :nomRole,
+                        description_role = :descriptionRole
                     WHERE id_role = :id
                 ");
 
@@ -117,12 +116,11 @@ class RoleController{
                     ":nomRole" => $nomRole,
                     ":descriptionRole" => $descriptionRole,
                     ":id" => $id
-
                 ]);
             }
         
-            // header("Location:index.php?action=detailRole");
-            // die();
+            header("Location:index.php?action=listRoles");
+            die();
         
         }
 

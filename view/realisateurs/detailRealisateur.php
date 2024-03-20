@@ -42,7 +42,7 @@ $infosRealisateur = $requeteRealisateur->fetch();
 
 <?php
 
-$titre = "Information concernant " . $infosRealisateur["realisateur_realisatrice"] ;
+$titre = "Informations concernant " . $infosRealisateur["realisateur_realisatrice"] ;
 $titre_secondaire = "Détail de " . $infosRealisateur["realisateur_realisatrice"] ;
 $contenu = ob_get_clean();
 

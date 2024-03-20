@@ -77,6 +77,7 @@ class RealisateurController{
                             VALUES (:prenom, :nom, :genre, :dateNaissance,
                                     :pays, :habitation, :infos)
                     ");
+
                     $requeteAjoutPersonne->execute([
                         ":prenom" => $prenom,
                         ":nom"  => $nom,
@@ -98,8 +99,8 @@ class RealisateurController{
                         ":id_personne" => $id_personne
                     ]);
 
-                    header('Location:index.php?action=listRealisateurs');
-                    die();
+                    // header('Location:index.php?action=listRealisateurs');
+                    // die();
 
                 }
 
