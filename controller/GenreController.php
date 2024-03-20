@@ -77,6 +77,7 @@ class GenreController{
 
     // --------------------------------------------------
 
+    // modifier un genre
     public function modifierGenre($id) {
         $pdo = Connect::seConnecter();
 

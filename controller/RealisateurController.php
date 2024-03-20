@@ -107,4 +107,67 @@ class RealisateurController{
         }
         require "view/realisateurs/ajouterRealisateur.php";
     }
+
+
+    // --------------------------------------------------
+
+    // modifier un réalisateur
+    public function modifierRealisateur($id) {
+        $pdo = Connect::seConnecter();
+
+        $requeteInfosRealisateur = $pdo->prepare("
+            SELECT  personne.prenom_personne, personne.nom_personne, personne.sexe_personne, personne.date_naissance_personne, 
+                    personne.pays_naissance, personne.lieu_habitation, personne.informations_personnelles,
+                    realisateur.id_realisateur
+            FROM personne
+                INNER JOIN realisateur ON personne.id_personne = realisateur.id_personne
+            WHERE realisateur.id_realisateur = :id
+        ");
+
+        $requeteInfosRealisateur->execute([
+            ":id" => $id
+        ]);
+
+        if(isset($_POST["submit"])) {
+            $prenom         = filter_input(INPUT_POST,"prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $nom            = filter_input(INPUT_POST,"nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $genre          = filter_input(INPUT_POST,"genre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $dateNaissance  = filter_input(INPUT_POST,"dateNaissance", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $pays           = filter_input(INPUT_POST,"pays", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $habitation     = filter_input(INPUT_POST,"habitation", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $infos          = filter_input(INPUT_POST,"infos", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            if($prenom && $nom && $genre && $dateNaissance && $pays && $habitation && $infos) {
+                $requeteModifRealisateur = $pdo->prepare("
+                    UPDATE personne AS p
+                        INNER JOIN realisateur r ON p.id_personne = r.id_personne
+                    SET p.prenom_personne = :prenom,
+                        p.nom_personne = :nom,
+                        p.sexe_personne = :genre, 
+                        p.date_naissance_personne = :dateNaissance, 
+                        p.pays_naissance = :pays, 
+                        p.lieu_habitation = :habitation, 
+                        p.informations_personnelles = :infos
+                    WHERE r.id_realisateur = :id
+                ");
+
+                $requeteModifRealisateur->execute([
+                    ":prenom" => $prenom,
+                    ":nom" => $nom,
+                    ":genre" => $genre,
+                    ":dateNaissance" => $dateNaissance,
+                    ":pays" => $pays,
+                    ":habitation" => $habitation,
+                    ":infos" => $infos,
+                    ":id" => $id
+                ]);
+            }
+
+            header("Location:index.php?action=listRealisateurs");
+            die();
+        }
+
+        require "view/realisateurs/modifierRealisateur.php";
+    }
+
 }

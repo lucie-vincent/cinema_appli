@@ -87,7 +87,7 @@ class RoleController{
     }
 
     // --------------------------------------------------
-
+    // modifier un rôle
     public function modifierRole($id) {
         $pdo = Connect::seConnecter();
         $requeteInfosRole = $pdo->prepare("

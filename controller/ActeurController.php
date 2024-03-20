@@ -106,6 +106,7 @@ class ActeurController {
 
     // --------------------------------------------------
 
+    // modifier un acteur
     public function modifierActeur($id) {
         $pdo = Connect::seConnecter();
 
