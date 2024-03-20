@@ -41,6 +41,7 @@ if(isset($_GET["action"])) {
         case "listActeurs"          : $ctrlActeur->listActeurs();           break;
         case "detailActeur"         : $ctrlActeur->detailActeur($id);       break;
         case "ajouterActeur"        : $ctrlActeur->ajouterActeur();         break;
+        case "modifierActeur"       : $ctrlActeur->modifierActeur($id);     break;
         // Réalisateurs
         case "listRealisateurs"     : $ctrlRealisateur->listRealisateurs();      break;
         case "detailRealisateur"    : $ctrlRealisateur->detailRealisateur($id);  break;

@@ -26,7 +26,8 @@ class ActeurController {
             SELECT  CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS 
                     acteur_actrice, personne.sexe_personne,  
                     DATE_FORMAT(personne.date_naissance_personne, '%d-%m-%Y') AS date_naissance,
-                    personne.pays_naissance, personne.lieu_habitation, personne.informations_personnelles
+                    personne.pays_naissance, personne.lieu_habitation, personne.informations_personnelles,
+                    acteur.id_acteur
             FROM personne
                 INNER JOIN acteur ON personne.id_personne = acteur.id_personne
             WHERE acteur.id_acteur =  :id
@@ -102,4 +103,65 @@ class ActeurController {
         }
         require "view/acteurs/ajouterActeur.php";
     }
+
+    // --------------------------------------------------
+
+    public function modifierActeur($id) {
+        $pdo = Connect::seConnecter();
+
+        $requeteInfosActeur = $pdo->prepare("
+            SELECT  personne.prenom_personne, personne.nom_personne, personne.sexe_personne, personne.date_naissance_personne, 
+                    personne.pays_naissance, personne.lieu_habitation, personne.informations_personnelles,
+                    acteur.id_acteur
+            FROM personne
+                    INNER JOIN acteur ON personne.id_personne = acteur.id_personne
+            WHERE acteur.id_acteur = :id
+        ");
+
+        $requeteInfosActeur->execute([
+            ":id" => $id
+        ]);
+
+        if(isset($_POST["submit"])) {
+            $prenom         = filter_input(INPUT_POST,"prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $nom            = filter_input(INPUT_POST,"nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $genre          = filter_input(INPUT_POST,"genre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $dateNaissance  = filter_input(INPUT_POST,"dateNaissance", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $pays           = filter_input(INPUT_POST,"pays", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $habitation     = filter_input(INPUT_POST,"habitation", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $infos          = filter_input(INPUT_POST,"infos", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            if($prenom && $nom && $genre && $dateNaissance && $pays && $habitation && $infos) {
+                $requeteModifActeur = $pdo->prepare("
+                    UPDATE personne AS p
+                        INNER JOIN acteur a ON p.id_personne = a.id_personne
+                    SET 	p.prenom_personne = :prenom,
+                        p.nom_personne = :nom,
+                        p.sexe_personne = :genre, 
+                        p.date_naissance_personne = :dateNaissance, 
+                        p.pays_naissance = :pays, 
+                        p.lieu_habitation = :habitation, 
+                        p.informations_personnelles = :infos
+                    WHERE a.id_acteur = :id
+                ");
+
+                $requeteModifActeur->execute([
+                    ":prenom" => $prenom,
+                    ":nom" => $nom,
+                    ":genre" => $genre,
+                    ":dateNaissance" => $dateNaissance,
+                    ":pays" => $pays,
+                    ":habitation" => $habitation,
+                    ":infos" => $infos,
+                    ":id" => $id
+                ]);
+            }
+
+            header("Location:index.php?action=listActeurs");
+            die();
+        }
+
+        require "view/acteurs/modifierActeur.php";
+    }
+
 }

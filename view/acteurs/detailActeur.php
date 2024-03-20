@@ -32,14 +32,18 @@ $infosActeur = $requeteActeurs->fetch();
 
 <h2> Filmographie </h2>
 
-<ul>
-    <?php foreach($requeteFilms->fetchAll() as $filmographie) { ?>
-        <li>
-            <a href="index.php?action=detailFilm&id=<?=$filmographie['id_film']?>"> <?= $filmographie["titre_film"] ?> (<?= $filmographie["annee_sortie"] ?>) </a>
-        </li>
-        <?php } ?>
-</ul>
+<div>
+    <ul>
+        <?php foreach($requeteFilms->fetchAll() as $filmographie) { ?>
+            <li>
+                <a href="index.php?action=detailFilm&id=<?=$filmographie['id_film']?>"> <?= $filmographie["titre_film"] ?> (<?= $filmographie["annee_sortie"] ?>) </a>
+            </li>
+            <?php } ?>
+    </ul>
+</div>
 
+
+<a href="index.php?action=modifierActeur&id=<?= $infosActeur["id_acteur"]?>">Modifier l'acteur</a>
 
 <?php
 
