@@ -15,6 +15,8 @@ class GenreController{
         require "view/genres/listGenres.php";
     }
 
+    // --------------------------------------------------
+
     // détail d'un genre 
     public function detailGenre($id) {
         $pdo = Connect::seConnecter();
@@ -42,6 +44,9 @@ class GenreController{
 
     }
 
+    // --------------------------------------------------
+
+
     // ajouter un genre
     public function ajouterGenre()  {
         // si on détecte le submit if(isset($_POST["submit"]))
@@ -68,6 +73,47 @@ class GenreController{
         }
 
         require "view/genres/ajouterGenre.php";
+    }
+
+    // --------------------------------------------------
+
+    public function modifierGenre($id) {
+        $pdo = Connect::seConnecter();
+
+        $requeteInfosGenre = $pdo->prepare("
+            SELECT id_genre, nom_genre, description_genre
+            FROM genre_film
+            WHERE id_genre = :id
+        ");
+
+        $requeteInfosGenre->execute([
+            ":id" => $id
+        ]);
+
+        if(isset($_POST["submit"])) {
+            $nomGenre = filter_input(INPUT_POST, "nomGenre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $descriptionGenre = filter_input(INPUT_POST, "descriptionGenre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+
+            if($nomGenre && $descriptionGenre) {
+                $requeteModifGenre = $pdo->prepare("
+                    UPDATE genre_film
+                    SET nom_genre = :nomGenre,
+                        description_genre = :descriptionGenre
+                    WHERE id_genre = :id
+                ");
+
+                $requeteModifGenre->execute([
+                    ":nomGenre" => $nomGenre,
+                    ":descriptionGenre" => $descriptionGenre,
+                    ":id" => $id
+                ]);
+            }
+
+            header("Location:index.php?action=listGenres");
+            die();
+        }
+
+        require "view/genres/modifierGenre.php";
     }
 
 }

@@ -31,22 +31,24 @@ if(count($listeFilms) == 0) {
 
 <h2> Liste des films </h2>
 
-<ul>
-    <?php foreach($listeFilms as $filmographie) { ?>
-        <li>
-            <a href="index.php?action=detailFilm&id=<?=$filmographie['id_film']?>"> <?= $filmographie["titre_film"] ?> (<?= $filmographie['anneeFilm']?>)</a>
-        </li>
-        <?php } ?>
-</ul>
+<div>
+    <ul>
+        <?php foreach($listeFilms as $filmographie) { ?>
+            <li>
+                <a href="index.php?action=detailFilm&id=<?=$filmographie['id_film']?>"> <?= $filmographie["titre_film"] ?> (<?= $filmographie['anneeFilm']?>)</a>
+            </li>
+            <?php } ?>
+        <?php
+        }
+        ?>
+    </ul>
+</div>
+
+
+<br>
+<a href="index.php?action=modifierGenre&id=<?= $infosGenre["id_genre"] ?>">Modifier le genre </a>
 
 <?php
-
-}
-
-?>
-
-<?php
-
 $titre = "Détail de " . $infosGenre["nom_genre"] ;
 $titre_secondaire = "Détail de " . $infosGenre["nom_genre"];
 $contenu = ob_get_clean();
