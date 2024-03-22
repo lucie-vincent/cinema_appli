@@ -198,14 +198,16 @@ class FilmController{
             FROM genre_film
         ");
 
-        // requête pour lister les acteur du film
+        // requête pour lister les acteurs + rôles du film
         $requeteActeursFilm = $pdo->prepare("
             SELECT  CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice,
-                    acteur.id_acteur
+                    acteur.id_acteur,
+                    role.nom_role, role.id_role
             FROM personne
                 INNER JOIN acteur ON personne.id_personne = acteur.id_personne
                 INNER JOIN jouer ON acteur.id_acteur = jouer.id_acteur
                 INNER JOIN film ON jouer.id_film = film.id_film
+                INNER JOIN role ON jouer.id_role = role.id_role
             WHERE film.id_film = :id
         ");
         $requeteActeursFilm->execute([
@@ -220,6 +222,49 @@ class FilmController{
                 INNER JOIN acteur ON personne.id_personne = acteur.id_personne
         ");
 
+        if(isset($_POST["submit"])) {
+            $titre = filter_input(INPUT_POST,"titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $dateSortie = filter_input(INPUT_POST,"dateSortie", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $duree = filter_input(INPUT_POST,"duree", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $synopsis = filter_input(INPUT_POST,"synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS); 
+            $note = filter_input(INPUT_POST,"note", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $realisateur = filter_input(INPUT_POST,"realisateur", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            // les genres cochés sont transmis sous forme de tableau : 
+                //d'où les filtres + le foreach par la suite
+            $genres = filter_input(INPUT_POST, "genres", FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
+            
+            // on fait les modifications des infos
+            if( $titre && $dateSortie && $duree && $synopsis && $note && $realisateur) {
+                // requete pour les infos
+                $requeteModifsInfos = $pdo->prepare("
+                    UPDATE film
+                        INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
+                        INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+                    SET	titre_film = :titre,
+                        date_sortie_france_film = :dateSortie,
+                        duree_mn_film = :duree,
+                        synopsis_film = :synopsis,
+                        film.id_realisateur = :realisateur
+                    WHERE id_film = :id
+                ");
+
+                $requeteModifsInfos->execute([
+                    ":titre" => $titre,
+                    ":dateSortie" => $dateSortie,
+                    ":duree" => $duree,
+                    ":synopsis" => $synopsis,
+                    ":note" => $note,
+                    ":realisateur" => $realisateur,
+                    ":id" => $id,
+                ]);
+
+                // requete pour les genres 
+                 
+
+            }
+
+
+        }
 
         require "view/films/modifierFilm.php";
     }

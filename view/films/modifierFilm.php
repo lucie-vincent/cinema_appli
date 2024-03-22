@@ -30,11 +30,11 @@ $acteurs = $requeteActeurs->fetchAll();
     <select name="realisateur" id="realisateur" required >
         <?php
             foreach($realisateurs as $realisateur){ ?>
-                <option value="<?= $infosFilm["id_realisateur"] ?>"
                     <?php 
-                        $infosFilm["id_realisateur"] == $realisateur["id_realisateur"] ? 'checked' : ''
-                    ?> >
-                    <?= $realisateur["realisateur_realisatrice"] ?>
+                        $isSelected = ($infosFilm["id_realisateur"] == $realisateur["id_realisateur"]) ? 'selected' : ''
+                    ?> 
+                <option value="<?= $infosFilm["id_realisateur"] ?>" <?= $isSelected ?>>
+                    <?= $realisateur["realisateur_realisatrice"] ?> 
                 </option>
 
        <?php  } ?>     
@@ -43,26 +43,29 @@ $acteurs = $requeteActeurs->fetchAll();
     <legend>Genre(s) :</legend>
     <?php
         foreach($genres as $genre) { ?>
+            <?php $isChecked = ($infosFilm["nom_genre"] == $genre["nom_genre"]) ? 'checked' : '' ?> 
             <input type="checkbox" name="genres[]" 
                     id="<?= $genre["nom_genre"] ?>"
-                    value="<?= $genre["id_genre"] ?> ">
+                    value="<?= $genre["id_genre"] ?>" 
+                    <?= $isChecked ?> >
             <label for="<?= $genre["nom_genre"] ?>">
                     <?= $genre["nom_genre"] ?>
             </label><br>
     <?php    } ?>
 
     <div>
-        <p>Casting</p>
+        <p>Casting : </p>
         <?php
             foreach($acteursFilm as $acteurCast) { ?>
         <ul>
-            <a href="index.php?action=detailActeur&id=<?= $acteurCast["id_acteur"]?>"> <?= $acteurCast["acteur_actrice"] ?> </a>
+            <a href="index.php?action=detailActeur&id=<?= $acteurCast["id_acteur"]?>"> <?= $acteurCast["acteur_actrice"] ?> </a> - <a 
+            href="index.php?action=detailRole&id=<?= $acteurCast["id_role"] ?>"> <?= $acteurCast["nom_role"] ?> </a>
         </ul>
         <?php } ?>
     </div>
 
     <div>
-        <p>Ajouter un-e acteur-trice</p>
+        <p>Ajouter un-e acteur-trice : </p>
         <label for="acteur">Acteur-trice :</label>
         <select name="acteur" id="acteur" required >
             <?php
