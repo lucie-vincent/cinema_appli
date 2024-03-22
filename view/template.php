@@ -8,17 +8,17 @@ on exploitera la temporisation de sortie -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $titre ?></title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="http://C:\laragon\www\cinema_appli\public\css\styles.css">
 </head>
 <body>
-    <nav>
-        <a href="index.php?action=listGenres">Genres</a>
-        <a href="index.php?action=listActeurs">Acteurs</a>
-        <a href="index.php?action=listRealisateurs">Réalisateurs</a>
-        <a href="index.php?action=listFilms">Films</a>
-        <a href="index.php?action=listRoles">Rôles</a>
-    </nav>
     <div id="wrapper">
+        <nav>
+            <a href="index.php?action=listGenres">Genres</a>
+            <a href="index.php?action=listActeurs">Acteurs</a>
+            <a href="index.php?action=listRealisateurs">Réalisateurs</a>
+            <a href="index.php?action=listFilms">Films</a>
+            <a href="index.php?action=listRoles">Rôles</a>
+        </nav>
         <main>
             <div id="contenu">
                 <h1>
@@ -30,6 +30,13 @@ on exploitera la temporisation de sortie -->
                 <?= $contenu ?>
             </div>
         </main>
+        <footer>
+            <ul>
+                <li>Nous Contacter</li>
+                <li>CGU</li>
+                <li>Politique de cookies</li>
+            </ul>
+        </footer>
     </div>
 </body>
 </html>
