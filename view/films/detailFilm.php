@@ -18,6 +18,7 @@ $listeCasting = $requeteCasting->fetchAll()
             <th>DUREE (mn)</th>
             <th>SYNOPSIS</th>
             <th>NOTE</th>
+            <th>RÉALISATEUR/RÉALISATRICE</th>
 
         </tr>
     </thead>
@@ -28,6 +29,9 @@ $listeCasting = $requeteCasting->fetchAll()
             <td><?= $infosFilm["duree_mn_film"] ?></td>
             <td><?= $infosFilm["synopsis_film"] ?></td>
             <td><?= $infosFilm["note_film"] ?></td>
+            <td>
+             <a href="index.php?action=detailRealisateur&id=<?= $infosFilm["id_realisateur"] ?>"><?= $infosFilm["realisateur_realisatrice"] ?></a>   
+            </td>
         </tr>
     </tbody>
 </table>
@@ -67,7 +71,7 @@ $listeCasting = $requeteCasting->fetchAll()
 </table>
 
 <br>
-<!-- <a href="index.php?action=associerGenre">Associer un genre</a> -->
+<a href="index.php?action=modifierFilm&id=<?= $infosFilm["id_film"] ?>">Modifier un film</a>
 
 <?php
 

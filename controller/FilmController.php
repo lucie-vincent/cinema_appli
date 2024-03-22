@@ -36,9 +36,13 @@ class FilmController{
         // les injections SQL. Il peut y avoir une injection car une variable est utilisée 
         // ":id"
         $requetefilm = $pdo->prepare("
-            SELECT film.titre_film, DATE_FORMAT(date_sortie_france_film, '%d-%m-%Y') AS dateFilm, film.duree_mn_film,
-            film.synopsis_film, film.note_film, film.id_film
+            SELECT	film.id_film, film.titre_film, 
+                    DATE_FORMAT(date_sortie_france_film, '%d-%m-%Y') AS dateFilm, 
+                    film.duree_mn_film, film.synopsis_film, film.note_film, film.id_realisateur,
+                    CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS realisateur_realisatrice	
             FROM film
+                INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
+                INNER JOIN personne ON realisateur.id_personne = personne.id_personne
             WHERE film.id_film = :id
         ");
         // on exécute la requête
@@ -159,5 +163,65 @@ class FilmController{
         require "view/films/ajouterFilm.php";
     }
 
+    // --------------------------------------------------
+
+    public function modifierFilm($id) {
+        $pdo = Connect::seConnecter();
+        // requête pour afficher les infos du film
+        $requeteInfos = $pdo->prepare("
+            SELECT	film.id_film, film.titre_film, film.date_sortie_france_film, 
+                    film.duree_mn_film, film.synopsis_film, film.note_film, film.id_realisateur,
+                    CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS realisateur_realisatrice,
+                    genre_film.nom_genre
+            FROM film
+                INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
+                INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+                INNER JOIN definir ON film.id_film = definir.id_film
+                INNER JOIN genre_film ON definir.id_genre = genre_film.id_genre
+            WHERE film.id_film = :id
+        ");
+
+        $requeteInfos->execute([
+            ":id" => $id
+        ]);
+
+        // requête pour lister les réalisateur
+        $requeteRealisateurs = $pdo->query("
+            SELECT realisateur.id_realisateur, CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS realisateur_realisatrice, personne.id_personne
+            FROM realisateur
+                INNER JOIN personne ON realisateur.id_personne = personne.id_personne
+        ");
+
+        // requête pour lister les genres
+        $requeteGenres = $pdo->query("
+            SELECT genre_film.id_genre, genre_film.nom_genre
+            FROM genre_film
+        ");
+
+        // requête pour lister les acteur du film
+        $requeteActeursFilm = $pdo->prepare("
+            SELECT  CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice,
+                    acteur.id_acteur
+            FROM personne
+                INNER JOIN acteur ON personne.id_personne = acteur.id_personne
+                INNER JOIN jouer ON acteur.id_acteur = jouer.id_acteur
+                INNER JOIN film ON jouer.id_film = film.id_film
+            WHERE film.id_film = :id
+        ");
+        $requeteActeursFilm->execute([
+            ":id" => $id
+        ]);
+
+        // requête pour lister tous les acteurs
+        $requeteActeurs = $pdo->query("
+            SELECT  CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice,
+                    acteur.id_acteur, personne.id_personne
+            FROM personne
+                INNER JOIN acteur ON personne.id_personne = acteur.id_personne
+        ");
+
+
+        require "view/films/modifierFilm.php";
+    }
 
 }
