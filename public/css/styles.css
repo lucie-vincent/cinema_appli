@@ -10,6 +10,7 @@
     --h2-font-size: 1.25rem;
     --h3-font-size: 1rem;
     --normal-font-size: 0.938rem;
+    --small-font-size: 0.850rem;
 
 }
 
@@ -25,10 +26,40 @@
     font-family: var(--body-font);
     background-color: var(--body-color);
     color: var(--text-color);
+    min-height: 100vh;
 }
 
-/*=============== NAV ===============*/
+a {
+    text-decoration: none;
+    color: var(--text-color);
+}
 
-/* footer  {
+ul, li {
+    list-style: none;
+}
 
-} */
+footer li  {
+    display: inline;
+    
+}
+
+footer {
+    font-size: var(--small-font-size);
+    background: linear-gradient(#0B0B1A, #280CDE);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-basis: auto;
+    height: 5em;
+}
+
+
+nav {
+    background: linear-gradient(#280CDE, #0B0B1A);
+    height: 5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/*===============  ===============*/
