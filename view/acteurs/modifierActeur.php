@@ -3,8 +3,8 @@ ob_start();
 
 $acteur = $requeteInfosActeur->fetch();
 // var_dump($acteur);
-$Fcheck = false ? 'checked' : '';
-$Mcheck = true ? 'checked' : '';
+$Fcheck = $acteur["sexe_personne"] == 'Féminin' ? 'checked' : '';
+$Mcheck = $acteur["sexe_personne"] == 'Masculin' ? 'checked' : '';
 
 ?>
 

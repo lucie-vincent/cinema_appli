@@ -1,6 +1,8 @@
 <?php
 ob_start();
 $realisateur = $requeteInfosRealisateur->fetch();
+$Fcheck = $realisateur["sexe_personne"] == 'Féminin' ? 'checked' : '';
+$Mcheck = $realisateur["sexe_personne"] == 'Masculin' ? 'checked' : '';
 ?>
 
 <form action="index.php?action=modifierRealisateur&id=<?= $realisateur["id_realisateur"] ?>" method="POST" >
@@ -11,9 +13,9 @@ $realisateur = $requeteInfosRealisateur->fetch();
     <input type="text" name="nom" id="nom" value="<?= $realisateur["nom_personne"] ?>" required ><br>
 
     <legend>Genre :</legend>
-    <input type="radio" name="genre" id="genreFeminin" value="Féminin" checked >
+    <input type="radio" name="genre" id="genreFeminin" value="Féminin" <?= $Fcheck ?>   >
     <label for="genreFeminin">Féminin</label><br>
-    <input type="radio" name="genre" id="genreMasculin" value="Masculin">
+    <input type="radio" name="genre" id="genreMasculin" value="Masculin" <?= $Mcheck ?> >
     <label for="genreMasculin">Masculin</label><br>
 
     <label for="dateNaissance">Date de naissance :</label><br>
