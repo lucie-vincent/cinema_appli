@@ -22,6 +22,7 @@ $genres = $requeteGenres->fetchAll();
 
     <label for="realisateur">Réalisateur :</label>
     <select name="realisateur" id="realisateur" required >
+        <option value="">--Choisissez un réalisateur :</option>
         <?php
             foreach($realisateurs as $realisateur){ ?>
                 <option value="<?= $realisateur["id_realisateur"] ?>">

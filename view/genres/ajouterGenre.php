@@ -10,11 +10,11 @@ ob_start();
 
 <form action="index.php?action=ajouterGenre" method="POST" >
     <label for="nomGenre">Nom du genre :</label>
-    <input type="text" name="nomGenre" id="nomGenre" placeholder="Documentaire"><br>
+    <input type="text" name="nomGenre" id="nomGenre" placeholder="Ex: Documentaire"><br>
 
     <label for="descriptionGenre">Description du genre :</label>
     <textarea name="descriptionGenre" id="descriptionGenre" cols="30" rows="10" 
-    placeholder="Un genre de film basé sur la réalité, utilisant des images réelles et des témoignages pour explorer des sujets variés..." ></textarea>
+    placeholder="Ex: Un genre de film basé sur la réalité, utilisant des images réelles et des témoignages pour explorer des sujets variés..." ></textarea>
     <br>
     
     <input type="submit" name="submit" value="Ajouter" >

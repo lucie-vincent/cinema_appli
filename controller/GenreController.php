@@ -70,6 +70,8 @@ class GenreController{
                     ":descriptionGenre" => $descriptionGenre
                 ]);
             }
+            header("Location:index.php?action=listGenres");
+            die();
         }
 
         require "view/genres/ajouterGenre.php";
