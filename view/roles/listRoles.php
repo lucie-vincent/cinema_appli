@@ -2,13 +2,16 @@
 
 <p> Il y a <?= $requete->rowCount() ?> rôles </p>
 
-<ul>
-    <?php foreach($requete->fetchAll() as $role) { ?>
-        <li>
-            <a href="index.php?action=detailRole&id=<?=$role['id_role']?>"> <?= $role["nom_role"] ?> </a>
-        </li>
-        <?php } ?>
-</ul>
+<div class="liste">
+    <ul>
+        <?php foreach($requete->fetchAll() as $role) { ?>
+            <li>
+                <a href="index.php?action=detailRole&id=<?=$role['id_role']?>"> <?= $role["nom_role"] ?> </a>
+            </li>
+            <?php } ?>
+    </ul>
+</div>
+
 
 <br>
 

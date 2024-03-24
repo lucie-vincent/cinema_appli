@@ -27,6 +27,7 @@
     background-color: var(--body-color);
     color: var(--text-color);
     min-height: 100vh;
+    width: 100%;
 }
 
 a {
@@ -39,18 +40,26 @@ ul, li {
 }
 
 footer li  {
-    display: inline;
+    display: inline-block;
+    width: 30%;
+    text-align: center;
     
 }
 
+footer ul {
+    width: 100%;
+}
+
 footer {
+    position: absolute;
+    height: 5em;
+    width: 100%;
     font-size: var(--small-font-size);
     background: linear-gradient(#0B0B1A, #280CDE);
     display: flex;
     align-items: center;
     justify-content: space-around;
-    flex-basis: auto;
-    height: 5em;
+    bottom: 0;
 }
 
 
@@ -60,6 +69,23 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0.5em;
 }
 
-/*===============  ===============*/
+.liste {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+}
+
+.liste li {
+    background-color: #2D2D61;
+    margin: 2px;
+    height: 2em;
+    vertical-align: baseline;
+}
+
+
+
+
+/*=============== BREAKPOINTS ===============*/

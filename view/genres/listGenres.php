@@ -2,14 +2,15 @@
 
 <p> Il y a <?= $requete->rowCount() ?> genres </p>
 
-
-<ul>
-    <?php foreach($requete->fetchAll() as $genre) { ?>
-        <li>
-            <a href="index.php?action=detailGenre&id=<?=$genre['id_genre']?>"> <?= $genre["nom_genre"] ?> </a>
-        </li>
-        <?php } ?>
-</ul>
+<div class="liste">
+    <ul>
+        <?php foreach($requete->fetchAll() as $genre) { ?>
+            <li>
+                <a href="index.php?action=detailGenre&id=<?=$genre['id_genre']?>"> <?= $genre["nom_genre"] ?> </a>
+            </li>
+            <?php } ?>
+    </ul>
+</div>
 
 
 <a href="index.php?action=ajouterGenre">Ajouter un genre</a>
