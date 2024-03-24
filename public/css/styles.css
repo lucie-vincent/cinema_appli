@@ -26,8 +26,10 @@
     font-family: var(--body-font);
     background-color: var(--body-color);
     color: var(--text-color);
+    position: relative;
     min-height: 100vh;
     width: 100%;
+    padding-bottom: 5em;
 }
 
 a {
@@ -37,17 +39,6 @@ a {
 
 ul, li {
     list-style: none;
-}
-
-footer li  {
-    display: inline-block;
-    width: 30%;
-    text-align: center;
-    
-}
-
-footer ul {
-    width: 100%;
 }
 
 footer {
@@ -61,6 +52,18 @@ footer {
     justify-content: space-around;
     bottom: 0;
 }
+
+footer li  {
+    display: inline-block;
+    width: 30%;
+    text-align: center;
+    
+}
+
+footer ul {
+    width: 100%;
+}
+
 
 
 nav {

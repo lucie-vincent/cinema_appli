@@ -67,7 +67,8 @@ $acteurs = $requeteActeurs->fetchAll();
     <div>
         <p>Ajouter un-e acteur-trice : </p>
         <label for="acteur">Acteur-trice :</label>
-        <select name="acteur" id="acteur" required >
+        <select name="acteur" id="acteur" >
+        <option value="">--Sélectionner un-e acteur-rice</option>
             <?php
                 foreach($acteurs as $acteur){ ?>
                     <option value="<?= $acteur["id_acteur"] ?>">
@@ -79,7 +80,7 @@ $acteurs = $requeteActeurs->fetchAll();
     </div>
 
     <br>
-    <input type="submit" name="submit" value="Ajouter" >
+    <input type="submit" name="submit" value="Modifier" >
 </form>
 
 <?php

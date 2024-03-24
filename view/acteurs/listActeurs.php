@@ -9,18 +9,18 @@ ob_start(); ?>
             <th>Prénom Nom</th>
             <th>date de naissance</th>
             <th>Genre</th>
-            <tr>
-                </thead>
-                <tbody>
-                    <?php
-        foreach($requete->fetchAll() as $acteur) { ?>
-            <tr>
-                <td><a href="index.php?action=detailActeur&id=<?=$acteur['id_acteur']?>"> <?= $acteur["acteur_actrice"] ?> </a></td>
-                <td><?= $acteur["date_naissance"] ?></td>
-                <td><?= $acteur["sexe_personne"] ?></td>
-            </tr>
-            <?php } ?>
-        </tbody>
+        </tr>
+    </thead>
+    <tbody>
+        <?php
+    foreach($requete->fetchAll() as $acteur) { ?>
+        <tr>
+            <td><a href="index.php?action=detailActeur&id=<?=$acteur['id_acteur']?>"> <?= $acteur["acteur_actrice"] ?> </a></td>
+            <td><?= $acteur["date_naissance"] ?></td>
+            <td><?= $acteur["sexe_personne"] ?></td>
+        </tr>
+        <?php } ?>
+    </tbody>
 </table>
     
 <br>

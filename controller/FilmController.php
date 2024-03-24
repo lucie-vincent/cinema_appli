@@ -133,7 +133,7 @@ class FilmController{
                         ":duree" => $duree,
                         ":synopsis" => $synopsis,
                         ":note" => $note,
-                        ":realisateur" => $realisateur,
+                        ":realisateur" => $realisateur
                     ]);
 
                     // on prépare la requête pour l'ajout dans la table film
@@ -234,7 +234,7 @@ class FilmController{
             $genres = filter_input(INPUT_POST, "genres", FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
             
             // on fait les modifications des infos
-            if( $titre && $dateSortie && $duree && $synopsis && $note && $realisateur) {
+            if( $titre && $dateSortie && $duree && $synopsis && $note && $realisateur && $genres) {
                 // requete pour les infos
                 $requeteModifsInfos = $pdo->prepare("
                     UPDATE film
@@ -244,6 +244,7 @@ class FilmController{
                         date_sortie_france_film = :dateSortie,
                         duree_mn_film = :duree,
                         synopsis_film = :synopsis,
+                        note_film = :note,
                         film.id_realisateur = :realisateur
                     WHERE id_film = :id
                 ");
@@ -255,14 +256,38 @@ class FilmController{
                     ":synopsis" => $synopsis,
                     ":note" => $note,
                     ":realisateur" => $realisateur,
-                    ":id" => $id,
+                    ":id" => $id
                 ]);
 
-                // requete pour les genres 
-                 
+                // requetes pour les genres 
+                // requete pour supprimer les genres
+                $requeteReinitialiserGenre = $pdo->prepare("
+                    DELETE FROM definir
+                    WHERE id_film = :id
+                ");
+
+                $requeteReinitialiserGenre->execute([
+                    ":id" => $id
+                ]);
+
+                // requete pour ajouter les genres
+                foreach($genres as $genre) {
+                    $requeteModifGenre = $pdo->prepare("
+                        INSERT INTO definir (id_film, id_genre)
+                        VALUES (:id_film, :id_genre)
+                    ");
+
+                    $requeteModifGenre->execute([
+                        ":id_film" => $id,
+                        ":id_genre" => $genre
+                    ]);
+
+                }
 
             }
 
+            header("Location:index.php?action=detailFilm&id=". $id);
+            die();
 
         }
 
