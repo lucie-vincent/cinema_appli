@@ -12,8 +12,9 @@ use Controller\CastingController;
 
 // on autocharge les classes du projet
 spl_autoload_register(function($class_name) {
-    include $class_name . '.php';
+    require str_replace("\\", DIRECTORY_SEPARATOR, $class_name) . '.php';
 });
+
 // on instancie les controller 
 $ctrlCinema         = new CinemaController();
 $ctrlFilm           = new FilmController();

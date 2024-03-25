@@ -74,8 +74,6 @@ class CastingController{
         $id_acteur = $arrayIds[1];
         $id_role = $arrayIds[2];
 
-        var_dump($id_film);
-
         // on prépare et on exécute la requête de suppression
         $requeteDeleteCasting = $pdo->prepare("
             DELETE FROM jouer
