@@ -60,5 +60,37 @@ class CastingController{
         require "view/casting/ajouterCasting.php";
 
     }
+
+    // ----------------------------------------------------------------------------------
+
+    // supprimer un casting
+    public function supprimerCasting($id) {
+        // var_dump($id);die;
+        // on se connecte à la BDD
+        $pdo = Connect::seConnecter();
+        
+        $arrayIds = explode(',',$id);
+        $id_film = $arrayIds[0];
+        $id_acteur = $arrayIds[1];
+        $id_role = $arrayIds[2];
+
+        var_dump($id_film);
+
+        // on prépare et on exécute la requête de suppression
+        $requeteDeleteCasting = $pdo->prepare("
+            DELETE FROM jouer
+            WHERE id_film = :id_film 
+            AND id_acteur = :id_acteur
+            AND id_role = :id_role
+        ");
+
+        $requeteDeleteCasting->execute([
+            "id_film" => $id_film,
+            "id_acteur" => $id_acteur,
+            "id_role" => $id_role
+        ]);
+        
+        require "view/films/modifierFilm.php";
+    }
   
 }

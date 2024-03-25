@@ -5,7 +5,7 @@ $infosFilm = $requeteInfos->fetch();
 $realisateurs = $requeteRealisateurs->fetchAll();
 $genres = $requeteGenres->fetchAll();
 $acteursFilm = $requeteActeursFilm->fetchAll();
-$acteurs = $requeteActeurs->fetchAll();
+// $acteurs = $requeteActeurs->fetchAll();
 ?>
 
 <form action="index.php?action=modifierFilm&id=<?= $infosFilm["id_film"] ?>" method="POST" >
@@ -53,35 +53,40 @@ $acteurs = $requeteActeurs->fetchAll();
             </label><br>
     <?php    } ?>
 
-    <div>
-        <p>Casting : </p>
-        <?php
-            foreach($acteursFilm as $acteurCast) { ?>
-        <ul>
-            <a href="index.php?action=detailActeur&id=<?= $acteurCast["id_acteur"]?>"> <?= $acteurCast["acteur_actrice"] ?> </a> - <a 
-            href="index.php?action=detailRole&id=<?= $acteurCast["id_role"] ?>"> <?= $acteurCast["nom_role"] ?> </a>
-        </ul>
-        <?php } ?>
-    </div>
-
-    <div>
+    
+    <!-- <div>
         <p>Ajouter un-e acteur-trice : </p>
         <label for="acteur">Acteur-trice :</label>
         <select name="acteur" id="acteur" >
-        <option value="">--Sélectionner un-e acteur-rice</option>
+            <option value="">--Sélectionner un-e acteur-rice</option>
             <?php
                 foreach($acteurs as $acteur){ ?>
                     <option value="<?= $acteur["id_acteur"] ?>">
                         <?= $acteur["acteur_actrice"] ?>
                     </option>
-
-        <?php  } ?>     
-        </select><br>
-    </div>
-
-    <br>
-    <input type="submit" name="submit" value="Modifier" >
+                    
+                    <?php  } ?>     
+                </select><br>
+            </div> -->
+            
+<br>
+<input type="submit" name="submit" value="Modifier" >
 </form>
+        
+<div>
+    <br>
+    <p>Casting : </p>
+    <?php
+        foreach($acteursFilm as $acteurCast) { ?>
+    <ul>
+        <a href="index.php?action=detailActeur&id=<?= $acteurCast["id_acteur"]?>"> <?= $acteurCast["acteur_actrice"] ?> </a> : <a 
+        href="index.php?action=detailRole&id=<?= $acteurCast["id_role"] ?>"> <?= $acteurCast["nom_role"] ?> </a> 
+        <a href="index.php?action=supprimerCasting&id=<?= $infosFilm["id_film"].","?><?=$acteurCast["id_acteur"].","?><?=$acteurCast["id_role"] ?>"> 
+        (-) </a>
+    </ul>
+    <?php } ?>
+</div>
+
 
 <?php
 $titre = "Modifier un film";

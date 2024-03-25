@@ -28,33 +28,34 @@ $id = (isset($_GET["id"])) ? $_GET["id"] : null;
 if(isset($_GET["action"])) {
     switch ($_GET["action"]) {
         // Films
-        case "listFilms"            : $ctrlFilm->listFilms();             break;
-        case "detailFilm"           : $ctrlFilm->detailFilm($id);         break;
-        case "ajouterFilm"          : $ctrlFilm->ajouterFilm();           break;
-        case "modifierFilm"         : $ctrlFilm->modifierFilm($id);       break;
+        case "listFilms"          : $ctrlFilm->listFilms();         break;
+        case "detailFilm"         : $ctrlFilm->detailFilm($id);     break;
+        case "ajouterFilm"        : $ctrlFilm->ajouterFilm();       break;
+        case "modifierFilm"       : $ctrlFilm->modifierFilm($id);   break;
         // Genres
-        case "listGenres"           : $ctrlGenre->listGenres();            break;
-        case "detailGenre"          : $ctrlGenre->detailGenre($id);        break;
-        case "ajouterGenre"         : $ctrlGenre->ajouterGenre();          break;
-        case "modifierGenre"        :$ctrlGenre->modifierGenre($id);       break;
-        // case "associerGenre"    : $ctrlCinema->associerGenre();         break;
+        case "listGenres"           : $ctrlGenre->listGenres();        break;
+        case "detailGenre"          : $ctrlGenre->detailGenre($id);    break;
+        case "ajouterGenre"         : $ctrlGenre->ajouterGenre();      break;
+        case "modifierGenre"        :$ctrlGenre->modifierGenre($id);   break;
+        // case "associerGenre"    : $ctrlCinema->associerGenre();     break;
         // Acteurs
-        case "listActeurs"          : $ctrlActeur->listActeurs();           break;
-        case "detailActeur"         : $ctrlActeur->detailActeur($id);       break;
-        case "ajouterActeur"        : $ctrlActeur->ajouterActeur();         break;
-        case "modifierActeur"       : $ctrlActeur->modifierActeur($id);     break;
+        case "listActeurs"          : $ctrlActeur->listActeurs();        break;
+        case "detailActeur"         : $ctrlActeur->detailActeur($id);    break;
+        case "ajouterActeur"        : $ctrlActeur->ajouterActeur();      break;
+        case "modifierActeur"       : $ctrlActeur->modifierActeur($id);  break;
         // Réalisateurs
         case "listRealisateurs"     : $ctrlRealisateur->listRealisateurs();         break;
         case "detailRealisateur"    : $ctrlRealisateur->detailRealisateur($id);     break;
         case "ajouterRealisateur"   : $ctrlRealisateur->ajouterRealisateur();       break;
         case "modifierRealisateur"  : $ctrlRealisateur->modifierRealisateur($id);   break;
         // Rôles
-        case "listRoles"            : $ctrlRole->listRoles();                   break;
-        case "detailRole"           : $ctrlRole->detailRole($id);               break;
-        case "ajouterRole"          : $ctrlRole->ajouterRole();                 break;
-        case "modifierRole"         : $ctrlRole->modifierRole($id);             break;
+        case "listRoles"            : $ctrlRole->listRoles();        break;
+        case "detailRole"           : $ctrlRole->detailRole($id);    break;
+        case "ajouterRole"          : $ctrlRole->ajouterRole();      break;
+        case "modifierRole"         : $ctrlRole->modifierRole($id);  break;
         // Casting
-        case "ajouterCasting"       : $ctrlCasting->ajouterCasting();        break;
+        case "ajouterCasting"       : $ctrlCasting->ajouterCasting();      break;
+        case "supprimerCasting"     : $ctrlCasting->supprimerCasting($id); break;
     }
 } else {
     $ctrlCinema->listFilms();

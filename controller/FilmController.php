@@ -215,12 +215,12 @@ class FilmController{
         ]);
 
         // requête pour lister tous les acteurs
-        $requeteActeurs = $pdo->query("
-            SELECT  CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice,
-                    acteur.id_acteur, personne.id_personne
-            FROM personne
-                INNER JOIN acteur ON personne.id_personne = acteur.id_personne
-        ");
+        // $requeteActeurs = $pdo->query("
+        //     SELECT  CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS acteur_actrice,
+        //             acteur.id_acteur, personne.id_personne
+        //     FROM personne
+        //         INNER JOIN acteur ON personne.id_personne = acteur.id_personne
+        // ");
 
         if(isset($_POST["submit"])) {
             $titre = filter_input(INPUT_POST,"titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -293,5 +293,6 @@ class FilmController{
 
         require "view/films/modifierFilm.php";
     }
+
 
 }
