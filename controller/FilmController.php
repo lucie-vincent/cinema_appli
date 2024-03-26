@@ -38,7 +38,8 @@ class FilmController{
         $requetefilm = $pdo->prepare("
             SELECT	film.id_film, film.titre_film, 
                     DATE_FORMAT(date_sortie_france_film, '%d-%m-%Y') AS dateFilm, 
-                    film.duree_mn_film, film.synopsis_film, film.note_film, film.id_realisateur,
+                    film.duree_mn_film, film.affiche_film,
+                    film.synopsis_film, film.note_film, film.id_realisateur,
                     CONCAT(personne.prenom_personne, ' ', personne.nom_personne) AS realisateur_realisatrice	
             FROM film
                 INNER JOIN realisateur ON film.id_realisateur = realisateur.id_realisateur
