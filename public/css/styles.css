@@ -83,12 +83,51 @@ nav {
 
 .liste li {
     background-color: #2D2D61;
-    margin: 2px;
+    margin: 0.3em;
     height: 2em;
     vertical-align: baseline;
 }
 
-
+.liste li a {
+    display: flex;
+    align-items: center;
+}
 
 
 /*=============== BREAKPOINTS ===============*/
+
+@media (min-width:320px) { 
+    #wrapper {
+        width: 100%;
+        min-height: 100vh;
+    }
+
+    nav {
+        height: 3em;
+    }
+
+    footer {
+        height: 3em;
+
+    }
+
+    .liste {
+        width: 80%;
+        justify-content: center;
+        display: flex;
+        gap: 3em;
+    }
+
+    .liste ul, li {
+        width: 100%;
+
+    }
+}
+
+
+@media (min-width:480px) { 
+    #wrapper {
+        width: 100%;
+        min-height: 100vh;
+    }
+}
