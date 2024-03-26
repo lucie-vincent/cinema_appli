@@ -87,6 +87,9 @@ class CastingController{
             "id_acteur" => $id_acteur,
             "id_role" => $id_role
         ]);
+
+        header('Location: index.php?action=modifierFilm&id=' . $id_film);
+        die(); 
         
         require "view/films/modifierFilm.php";
     }
