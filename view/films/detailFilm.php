@@ -73,6 +73,9 @@ $listeCasting = $requeteCasting->fetchAll()
 <br>
 <a href="index.php?action=modifierFilm&id=<?= $infosFilm["id_film"] ?>">Modifier un film</a>
 
+<br>
+<a href="index.php?action=supprimerFilm&id=<?= $infosFilm["id_film"] ?>">Supprimer un film</a>
+
 <?php
 
 $titre = "Détail de " . $infosFilm["titre_film"] ;

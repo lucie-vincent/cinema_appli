@@ -294,5 +294,36 @@ class FilmController{
         require "view/films/modifierFilm.php";
     }
 
+    // --------------------------------------------------
+
+    // supprimer un film
+    public function supprimerFilm($id) {
+        $pdo = Connect::seConnecter();
+
+        // on supprime de la table définir 
+        $requeteDeleteDefinir = $pdo->prepare("
+            DELETE FROM definir
+            WHERE id_film = :id
+        ");
+
+        $requeteDeleteDefinir->execute([
+            ":id" => $id
+        ]);
+
+        // on supprime de la table film 
+        $requeteDeleteFilm = $pdo->prepare("
+            DELETE FROM film
+            WHERE id_film = :id
+        ");
+
+        $requeteDeleteFilm->execute([
+            ":id" => $id
+        ]);
+
+        header('Location:index.php?action=listFilms');
+        die();
+
+    }
+    
 
 }
