@@ -7,6 +7,8 @@ ob_start();
 $infosGenre = $requeteGenre->fetch();
 $listeFilms = $requeteFilms->fetchAll();
 
+var_dump($listeFilms);
+
 if(count($listeFilms) == 0) {
     echo "Pas de films associés à ce genre";
 } else {
@@ -47,6 +49,9 @@ if(count($listeFilms) == 0) {
 
 <br>
 <a href="index.php?action=modifierGenre&id=<?= $infosGenre["id_genre"] ?>">Modifier le genre </a>
+
+<br>
+<a href="index.php?action=supprimerGenre&id=<?=$infosGenre["id_genre"] ?>"> Supprimer le genre </a>
 
 <?php
 $titre = "Détail de " . $infosGenre["nom_genre"] ;

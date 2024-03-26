@@ -69,6 +69,7 @@ class CastingController{
         // on se connecte à la BDD
         $pdo = Connect::seConnecter();
         
+        // on récupère les ids dans le tableau id
         $arrayIds = explode(',',$id);
         $id_film = $arrayIds[0];
         $id_acteur = $arrayIds[1];

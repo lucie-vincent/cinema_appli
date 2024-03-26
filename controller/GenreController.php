@@ -31,7 +31,7 @@ class GenreController{
         // afficher la liste des films de ce genre
         $requeteFilms = $pdo->prepare("
             SELECT	genre_film.id_genre, genre_film.nom_genre, 
-                film.id_film, film.titre_film, YEAR(film.date_sortie_france_film) AS anneeFilm
+                    film.id_film, film.titre_film, YEAR(film.date_sortie_france_film) AS anneeFilm
             FROM film
                 INNER JOIN definir ON film.id_film = definir.id_film
                 INNER JOIN genre_film ON  definir.id_genre = genre_film.id_genre
@@ -117,6 +117,38 @@ class GenreController{
         }
 
         require "view/genres/modifierGenre.php";
+    }
+
+    // ----------------------------------------------------------------------
+
+    // supprimer un genre
+    public function supprimerGenre($id){
+        $pdo = Connect::seConnecter(); 
+
+         // on supprime d'abord dans la table définir, à cause de la contrainte
+         $requeteDeleteDefinir = $pdo->prepare("
+                DELETE FROM definir
+                WHERE  id_genre = :id_genre
+         ");
+
+         $requeteDeleteDefinir->execute([
+                ":id_genre" => $id
+         ]);
+
+         // on supprime dans la table genre_film
+         $requeteDeleteGenre = $pdo->prepare("
+                DELETE FROM genre_film
+                WHERE  id_genre = :id_genre
+         ");
+
+         $requeteDeleteGenre->execute([
+                ":id_genre" => $id
+         ]);
+
+        header('Location:index.php?action=listGenres');
+        die();
+    
+        require "view/genres/detailGenre.php";
     }
 
 }
