@@ -55,11 +55,12 @@ if(isset($_GET["action"])) {
         case "modifierRealisateur"  : $ctrlRealisateur->modifierRealisateur($id);   break;
 
         // Rôles
-        case "listRoles"            : $ctrlRole->listRoles();        break;
-        case "detailRole"           : $ctrlRole->detailRole($id);    break;
-        case "ajouterRole"          : $ctrlRole->ajouterRole();      break;
-        case "modifierRole"         : $ctrlRole->modifierRole($id);  break;
-        
+        case "listRoles"        : $ctrlRole->listRoles();        break;
+        case "detailRole"       : $ctrlRole->detailRole($id);    break;
+        case "ajouterRole"      : $ctrlRole->ajouterRole();      break;
+        case "modifierRole"     : $ctrlRole->modifierRole($id);  break;
+        case "supprimerRole"    : $ctrlRole->supprimerRole($id);      break;
+
         // Casting
         case "ajouterCasting"       : $ctrlCasting->ajouterCasting();      break;
         case "supprimerCasting"     : $ctrlCasting->supprimerCasting($id); break;

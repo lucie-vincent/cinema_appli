@@ -45,6 +45,9 @@ $casting = $requeteCasting->fetchAll();
 <br>
 <a href="index.php?action=modifierRole&id=<?=$roleInfos["id_role"] ?>">Modifier le rôle</a>
 
+<br>
+<a href="index.php?action=supprimerRole&id=<?=$roleInfos["id_role"] ?>">Supprimer le rôle </a>
+
 <?php
 
 $titre = "Détail de " . $roleInfos["nom_role"] ;

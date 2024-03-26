@@ -87,6 +87,8 @@ class RoleController{
     }
 
     // --------------------------------------------------
+
+
     // modifier un rôle
     public function modifierRole($id) {
         $pdo = Connect::seConnecter();
@@ -125,6 +127,38 @@ class RoleController{
         }
 
         require "view/roles/modifierRole.php";
+    }
+
+    // --------------------------------------------------
+
+    public function supprimerRole($id) {
+        $pdo = Connect::seConnecter();
+
+        // on fait la suppression dans la table jouer d'abord, à cause de la contrainte
+        $requeteDeleteJouer = $pdo->prepare("
+            DELETE FROM jouer
+            WHERE id_role = :id
+        ");
+
+        $requeteDeleteJouer->execute([
+            ":id" => $id
+        ]);
+
+        // on fait la suppression du rôle dans la table rôle
+        $requeteDeleteRole = $pdo->prepare("
+            DELETE FROM role
+            WHERE id_role = :id
+        ");
+
+        $requeteDeleteRole->execute([
+            ":id" => $id
+        ]);
+
+        header('Location:index.php?action=listRoles');
+        die();
+
+
+        require "view/roles/detailRole.php";
     }
 
 }
