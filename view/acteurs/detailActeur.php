@@ -42,9 +42,12 @@ $infosActeur = $requeteActeurs->fetch();
     </ul>
 </div>
 
-
+<br>
 <a href="index.php?action=modifierActeur&id=<?= $infosActeur["id_acteur"]?>">Modifier l'acteur</a>
 
+<br>
+<br>
+<a href="index.php?action=supprimerActeur&id=<?=$infosActeur["id_acteur"]?>"> Supprimer l'acteur </a>
 <?php
 
 $titre = "Informations concernant " . $infosActeur["acteur_actrice"] ;

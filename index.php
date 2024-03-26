@@ -40,26 +40,27 @@ if(isset($_GET["action"])) {
         case "ajouterGenre"    :$ctrlGenre->ajouterGenre();       break;
         case "modifierGenre"   : $ctrlGenre->modifierGenre($id);  break;
         case "supprimerGenre"  : $ctrlGenre->supprimerGenre($id); break;
-        // case "associerGenre"    : $ctrlCinema->associerGenre();     break;
+        // case "associerGenre": $ctrlCinema->associerGenre();    break;
 
         // Acteurs
         case "listActeurs"          : $ctrlActeur->listActeurs();        break;
         case "detailActeur"         : $ctrlActeur->detailActeur($id);    break;
         case "ajouterActeur"        : $ctrlActeur->ajouterActeur();      break;
         case "modifierActeur"       : $ctrlActeur->modifierActeur($id);  break;
+        case "supprimerActeur"      : $ctrlActeur->supprimerActeur($id); break;
 
         // Réalisateurs
-        case "listRealisateurs"     : $ctrlRealisateur->listRealisateurs();         break;
-        case "detailRealisateur"    : $ctrlRealisateur->detailRealisateur($id);     break;
-        case "ajouterRealisateur"   : $ctrlRealisateur->ajouterRealisateur();       break;
-        case "modifierRealisateur"  : $ctrlRealisateur->modifierRealisateur($id);   break;
+        case "listRealisateurs"     : $ctrlRealisateur->listRealisateurs();        break;
+        case "detailRealisateur"    : $ctrlRealisateur->detailRealisateur($id);    break;
+        case "ajouterRealisateur"   : $ctrlRealisateur->ajouterRealisateur();      break;
+        case "modifierRealisateur"  : $ctrlRealisateur->modifierRealisateur($id);  break;
 
         // Rôles
         case "listRoles"        : $ctrlRole->listRoles();        break;
         case "detailRole"       : $ctrlRole->detailRole($id);    break;
         case "ajouterRole"      : $ctrlRole->ajouterRole();      break;
         case "modifierRole"     : $ctrlRole->modifierRole($id);  break;
-        case "supprimerRole"    : $ctrlRole->supprimerRole($id);      break;
+        case "supprimerRole"    : $ctrlRole->supprimerRole($id); break;
 
         // Casting
         case "ajouterCasting"       : $ctrlCasting->ajouterCasting();      break;

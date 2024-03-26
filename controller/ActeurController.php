@@ -165,4 +165,34 @@ class ActeurController {
         require "view/acteurs/modifierActeur.php";
     }
 
+    // --------------------------------------------------
+
+    //  supprimer un acteur
+    public function supprimerActeur($id) {
+        $pdo = Connect::seConnecter();
+
+        // on supprime de la table jouer à cause des contraintes
+        $requeteDeleteJouer = $pdo->prepare("
+            DELETE FROM jouer
+            WHERE id_acteur = :id
+        ");
+
+        $requeteDeleteJouer->execute([
+            ":id" => $id
+        ]);
+
+        // on supprime de la table acteur
+        $requeteDeleteActeur = $pdo->prepare("
+            DELETE FROM acteur
+            WHERE id_acteur = :id
+        ");
+
+        $requeteDeleteActeur->execute([
+            ":id" => $id
+        ]);
+
+        header('Location:index.php?action=listActeurs');
+        
+        require "view/acteurs/detailActeur.php";
+    }
 }
