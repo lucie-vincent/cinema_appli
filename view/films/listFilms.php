@@ -14,6 +14,7 @@ ob_start(); ?>
         <tr>
             <th>TITRE</th>
             <th>DATE DE SORTIE</th>
+            <th>AFFICHE</th>
         <tr>
     </thead>
     <tbody>
@@ -22,6 +23,7 @@ ob_start(); ?>
             <tr>
                 <td><a href="index.php?action=detailFilm&id=<?=$film['id_film']?>"> <?= $film["titre_film"] ?> </a></td>
                 <td><?= $film["annee_sortie"] ?></td>
+                <td> <img src="./public/img/affiches/<?= $film["affiche_film"] ?>" alt="affiche" id="petite-affiche" > </td>
             </tr>
     <?php } ?>
     </tbody>

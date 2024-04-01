@@ -30,11 +30,13 @@ $listeCasting = $requeteCasting->fetchAll()
             <td><?= $infosFilm["synopsis_film"] ?></td>
             <td><?= $infosFilm["note_film"] ?></td>
             <td>
-             <a href="index.php?action=detailRealisateur&id=<?= $infosFilm["id_realisateur"] ?>"><?= $infosFilm["realisateur_realisatrice"] ?></a>   
+                <a href="index.php?action=detailRealisateur&id=<?= $infosFilm["id_realisateur"] ?>"><?= $infosFilm["realisateur_realisatrice"] ?></a>   
             </td>
         </tr>
     </tbody>
 </table>
+
+<img src="./public/img/affiches/<?=$infosFilm["affiche_film"] ?>" alt="affiche" id="grande-affiche" >
 
 <table>
     <thead>

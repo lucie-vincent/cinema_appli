@@ -41,6 +41,14 @@ ul, li {
     list-style: none;
 }
 
+#petite-affiche {
+    width: 10em;
+}
+
+#grande-affiche {
+    width: 20em;
+}
+
 footer {
     position: absolute;
     height: 5em;

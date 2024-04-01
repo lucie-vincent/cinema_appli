@@ -15,7 +15,8 @@ class FilmController{
         
         // on pense à récupérer l'id dans la requete car permet d'afficher les bonnes pages dans les URL
         $requete = $pdo->query("
-            SELECT id_film, titre_film, YEAR(date_sortie_france_film) AS annee_sortie
+            SELECT id_film, titre_film, YEAR(date_sortie_france_film) AS annee_sortie,
+                    affiche_film
             FROM film
             ORDER BY film.titre_film ASC
         ");

@@ -83,14 +83,14 @@ CREATE TABLE IF NOT EXISTS `film` (
 
 -- Listage des données de la table exercice_cinema.film : ~8 rows (environ)
 INSERT INTO `film` (`id_film`, `titre_film`, `date_sortie_france_film`, `duree_mn_film`, `affiche_film`, `synopsis_film`, `note_film`, `id_realisateur`) VALUES
-	(1, 'Thelma et Louise', '1991-05-29', 129, 'indisponible.jpg', 'Deux amies partent en virée dans le désert pour échapper à leur quotidien, mais leur voyage prend une tournure inattendue.', 5, 1),
-	(2, 'Gladiator', '2000-06-20', 171, 'indisponible.jpg', 'Un général romain cherchant à venger la mort de sa famille se retrouve forcé de devenir un gladiateur dans l\'arène.', 5, 1),
-	(3, 'Blade Runner', '1982-09-15', 117, 'indisponible.jpg', 'Dans un futur dystopique, un détective doit traquer des robots répliquants dangereux dans une ville en décadence.', 5, 1),
-	(4, 'Le Dernier Duel', '2021-10-13', 152, 'indisponible.jpg', 'Deux hommes se battent pour leur honneur dans le dernier duel judiciaire autorisé en France au Moyen Âge.', 5, 1),
-	(5, 'Virgin Suicides', '2000-09-27', 97, 'indisponible.jpg', 'Un groupe de filles adolescentes, fascinées par la mort, se retrouve dans une spirale de tragédie et de mystère.', 5, 2),
-	(6, 'Taxi Driver', '1976-05-13', 113, 'indisponible.jpg', 'Un vétéran du Vietnam devenu chauffeur de taxi à New York devient obsédé par le nettoyage de la ville de la corruption.', 5, 4),
-	(7, 'Le Parrain III', '1991-03-27', 170, 'indisponible.jpg', 'Le patriarche du crime Michael Corleone tente de réhabiliter sa famille tout en confrontant les fantômes du passé.', 2, 5),
-	(8, 'La Leçon de Piano', '1993-05-17', 121, 'indisponible.jpg', 'En Nouvelle-Zélande au 19e siècle, une femme muette est mariée à un fermier et emmène avec elle son piano, son unique moyen d'expression. Elle entre en relation avec un voisin solitaire et autoritaire qui accepte de racheter le piano en échange de leçons privées, mais leur relation prend un tournant imprévu lorsqu'ils découvrent une passion partagée pour la musique et l'art', 5, 3);
+	(1, 'Thelma et Louise', '1991-05-29', 129, 'thelma_et_louise.jpg', 'Deux amies partent en virée dans le désert pour échapper à leur quotidien, mais leur voyage prend une tournure inattendue.', 5, 1),
+	(2, 'Gladiator', '2000-06-20', 171, 'gladiator.jpg', 'Un général romain cherchant à venger la mort de sa famille se retrouve forcé de devenir un gladiateur dans l\'arène.', 5, 1),
+	(3, 'Blade Runner', '1982-09-15', 117, 'blade_runner.jpg', 'Dans un futur dystopique, un détective doit traquer des robots répliquants dangereux dans une ville en décadence.', 5, 1),
+	(4, 'Le Dernier Duel', '2021-10-13', 152, 'dernier_duel.jpg', 'Deux hommes se battent pour leur honneur dans le dernier duel judiciaire autorisé en France au Moyen Âge.', 5, 1),
+	(5, 'Virgin Suicides', '2000-09-27', 97, 'virgin_suicides.jpg', 'Un groupe de filles adolescentes, fascinées par la mort, se retrouve dans une spirale de tragédie et de mystère.', 5, 2),
+	(6, 'Taxi Driver', '1976-05-13', 113, 'taxi_driver.jpg', 'Un vétéran du Vietnam devenu chauffeur de taxi à New York devient obsédé par le nettoyage de la ville de la corruption.', 5, 4),
+	(7, 'Le Parrain III', '1991-03-27', 170, 'parrain_III.jpg', 'Le patriarche du crime Michael Corleone tente de réhabiliter sa famille tout en confrontant les fantômes du passé.', 2, 5),
+	(8, 'La Leçon de Piano', '1993-05-17', 121, 'lecon_piano.jpg', 'En Nouvelle-Zélande au 19e siècle, une femme muette est mariée à un fermier et emmène avec elle son piano, son unique moyen d'expression. Elle entre en relation avec un voisin solitaire et autoritaire qui accepte de racheter le piano en échange de leçons privées, mais leur relation prend un tournant imprévu lorsqu'ils découvrent une passion partagée pour la musique et l'art', 5, 3);
 
 -- Listage de la structure de la table exercice_cinema. genre_film
 CREATE TABLE IF NOT EXISTS `genre_film` (
