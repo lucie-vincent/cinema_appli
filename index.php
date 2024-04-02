@@ -25,12 +25,15 @@ $ctrlRole           = new RoleController();
 $ctrlCasting        = new CastingController();
 
 
+// $id = isset($_GET["id"]) ? $_GET["id"] : null;
+$id = htmlentities(isset($_GET["id"])) ? $_GET["id"] : null;
+
 // il faut se protéger contre les failles XSS (Cross Site Scripting) - on peut utiliser des filtres ou des méthodes
 // pour les input - on utilise les filtres (voir FILTER_INPUT)
 // pour les variables on peut utiliser FILTER_VAR ou 2 fonctions :
 // htmlspecialchars() et htmlentities()
 // voir également le site OWASP (Open Worldwide Application Security Project) -- attacks/XSS ou TYpe_Of_Cross-Site_Scripting pour plus d'infos
-$id = htmlentities(isset($_GET["id"])) ? htmlentities($_GET["id"]) : null; 
+// $id = htmlentities($id);
 
 if(isset($_GET["action"])) {
     // on met on place le switch pour vérifier l'action des URL, et plus haut, on vérifie avec le if(isset($_GET["action"])) qu'une action est bien passée en paramètres
@@ -45,7 +48,7 @@ if(isset($_GET["action"])) {
         // Genres
         case "listGenres"      : $ctrlGenre->listGenres();        break;
         case "detailGenre"     : $ctrlGenre->detailGenre($id);    break;
-        case "ajouterGenre"    :$ctrlGenre->ajouterGenre();       break;
+        case "ajouterGenre"    : $ctrlGenre->ajouterGenre();       break;
         case "modifierGenre"   : $ctrlGenre->modifierGenre($id);  break;
         case "supprimerGenre"  : $ctrlGenre->supprimerGenre($id); break;
         // case "associerGenre": $ctrlCinema->associerGenre();    break;
@@ -71,8 +74,8 @@ if(isset($_GET["action"])) {
         case "supprimerRole"    : $ctrlRole->supprimerRole($id); break;
 
         // Casting
-        case "ajouterCasting"       : $ctrlCasting->ajouterCasting();      break;
-        case "supprimerCasting"     : $ctrlCasting->supprimerCasting($id); break;
+        case "ajouterCasting"    : $ctrlCasting->ajouterCasting();      break;
+        case "supprimerCasting"  : $ctrlCasting->supprimerCasting($id); break;
     }
 } else {
     $ctrlCinema->listFilms();
