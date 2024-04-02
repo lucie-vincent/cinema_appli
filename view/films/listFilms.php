@@ -9,7 +9,7 @@ ob_start(); ?>
     Il y a <?= $requete->rowCount() ?> films
 </p>
 
-<table>
+<table id="liste-films" >
     <thead>
         <tr>
             <th>TITRE</th>

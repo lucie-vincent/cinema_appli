@@ -23,12 +23,14 @@ on exploitera la temporisation de sortie -->
         </nav>
         <main>
             <div id="contenu">
-                <h1>
-                    PDO Cinema
-                </h1>
-                <h2>
-                    <?= $titre_secondaire ?>
-                </h2>
+                <div class="description-block">
+                    <h1>
+                        PDO Cinema
+                    </h1>
+                    <h2>
+                        <?= $titre_secondaire ?>
+                    </h2>
+                </div>
                 <?= $contenu ?>
             </div>
         </main>

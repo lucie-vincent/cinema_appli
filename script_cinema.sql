@@ -90,7 +90,7 @@ INSERT INTO `film` (`id_film`, `titre_film`, `date_sortie_france_film`, `duree_m
 	(5, 'Virgin Suicides', '2000-09-27', 97, 'virgin_suicides.jpg', 'Un groupe de filles adolescentes, fascinées par la mort, se retrouve dans une spirale de tragédie et de mystère.', 5, 2),
 	(6, 'Taxi Driver', '1976-05-13', 113, 'taxi_driver.jpg', 'Un vétéran du Vietnam devenu chauffeur de taxi à New York devient obsédé par le nettoyage de la ville de la corruption.', 5, 4),
 	(7, 'Le Parrain III', '1991-03-27', 170, 'parrain_III.jpg', 'Le patriarche du crime Michael Corleone tente de réhabiliter sa famille tout en confrontant les fantômes du passé.', 2, 5),
-	(8, 'La Leçon de Piano', '1993-05-17', 121, 'lecon_piano.jpg', 'En Nouvelle-Zélande au 19e siècle, une femme muette est mariée à un fermier et emmène avec elle son piano, son unique moyen d'expression. Elle entre en relation avec un voisin solitaire et autoritaire qui accepte de racheter le piano en échange de leçons privées, mais leur relation prend un tournant imprévu lorsqu'ils découvrent une passion partagée pour la musique et l'art', 5, 3);
+	(8, 'La Leçon de Piano', '1993-05-17', 121, 'lecon_piano.jpg', 'En Nouvelle-Zélande au 19e siècle, une femme muette est mariée à un fermier et emmène avec elle son piano', 5, 3);
 
 -- Listage de la structure de la table exercice_cinema. genre_film
 CREATE TABLE IF NOT EXISTS `genre_film` (
@@ -166,7 +166,7 @@ INSERT INTO `personne` (`id_personne`, `prenom_personne`, `nom_personne`, `sexe_
 	(10, 'Adam', 'DRIVER', 'Masculin', '1983-11-19', 'États-Unis', 'San Diego', 'Adam Driver est un acteur américain qui s\'est fait connaître pour son rôle dans la série télévisée "Girls" et la saga "Star Wars".'),
 	(11, 'Sofia', 'COPPOLA', 'Féminin', '1971-05-14', 'États-Unis', 'New York', 'Sofia Coppola est une réalisatrice, scénariste et actrice américaine. Elle est notamment connue pour son film "Lost in Translation".'),
 	(12, 'Francis Ford', 'COPPOLA', 'Masculin', '1939-04-07', 'États-Unis', 'Los Angeles', 'Francis Ford Coppola est un réalisateur, scénariste et producteur de cinéma américain, largement reconnu pour son travail sur "The Godfather" et "Apocalypse Now".'),
-	(13, 'Jane', 'CAMPION', 'Féminin', '1954-04-30', 'Nouvelle-Zélande', 'Wellington', 'Jane Campion est une réalisatrice, scénariste et productrice néo-zélandaise. Elle est surtout connue pour son film "La Leçon de Piano", qui lui a valu de remporter la Palme d'or au Festival de Cannes en 1993, devenant ainsi la première réalisatrice à recevoir cette distinction'),
+	(13, 'Jane', 'CAMPION', 'Féminin', '1954-04-30', 'Nouvelle-Zélande', 'Wellington', 'Jane Campion est une réalisatrice, scénariste et productrice néo-zélandaise. Elle est surtout connue pour son film "La Leçon de Piano".'),
 	(14, 'Alfredo James', 'PACINO', 'Masculin', '1940-04-25', 'Non défini', 'Non défini', 'Al Pacino est un acteur américain légendaire, célèbre pour ses performances dans de nombreux films classiques.'),
 	(15, 'Martin ', 'SCORSESE', 'Masculin', '1942-11-17', 'Non défini', 'Non défini', 'Martin Scorsese est un réalisateur, producteur et scénariste américain, largement reconnu comme l\'un des plus grands réalisateurs de tous les temps.');
 

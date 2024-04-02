@@ -10,7 +10,7 @@ $listeCasting = $requeteCasting->fetchAll()
 
 ?>
 
-<table>
+<table class="detail-film">
     <thead>
         <tr>
             <th>TITRE</th>
@@ -36,9 +36,12 @@ $listeCasting = $requeteCasting->fetchAll()
     </tbody>
 </table>
 
-<img src="./public/img/affiches/<?=$infosFilm["affiche_film"] ?>" alt="affiche" id="grande-affiche" >
+<div class="affiche" >
+    <img src="./public/img/affiches/<?=$infosFilm["affiche_film"] ?>" alt="affiche" id="grande-affiche" >
+</div>
 
-<table>
+
+<table class="detail-film" >
     <thead>
             <tr>
                 <th>GENRE(S)</th>
@@ -54,7 +57,7 @@ $listeCasting = $requeteCasting->fetchAll()
         </tbody>
 </table>
 
-<table>
+<table class="detail-film" >
     <thead>
             <tr>
                 <th>PERSONNAGE</th>

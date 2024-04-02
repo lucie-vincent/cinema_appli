@@ -41,13 +41,30 @@ ul, li {
     list-style: none;
 }
 
+nav {
+    background: linear-gradient(#280CDE, #0B0B1A);
+    height: 5em;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5em;
+}
+
+#contenu {
+    display: flex;
+    flex-direction: column;
+}
+
 #petite-affiche {
     width: 10em;
+    border-radius: 0.5em;
 }
 
 #grande-affiche {
     width: 20em;
+    border-radius: 0.5em;
 }
+
 
 footer {
     position: absolute;
@@ -72,16 +89,8 @@ footer ul {
     width: 100%;
 }
 
+/*=============== CONTENU ===============*/
 
-
-nav {
-    background: linear-gradient(#280CDE, #0B0B1A);
-    height: 5em;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5em;
-}
 
 .liste {
     width: 80%;
@@ -100,6 +109,29 @@ nav {
     display: flex;
     align-items: center;
 }
+
+/* td {
+    background-color: #2D2D61;
+    margin: 0.3em;
+    height: 2em;
+} */
+
+/*=============== Liste Films ===============*/
+
+#liste-films {
+    justify-content: center;
+}
+
+/*=============== Détail Film ===============*/
+
+.detail-film {
+    justify-content: center;
+}
+
+div.affiche {
+    text-align: center;
+}
+
 
 
 /*=============== BREAKPOINTS ===============*/
